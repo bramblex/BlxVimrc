@@ -4,22 +4,15 @@
 " auth:     brambles
 " email:    qjnight@gmail.com
 " date:     2015-2-18
+"
 
-if filereadable(expand('~/.vim/bundle.vimrc'))
-    source ~/.vim/bundle.vimrc
-endif
+let script_file = [ 'bundle', 'base', 'hotkeys', 'themes', ]
+let base_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
-if filereadable(expand('~/.vim/base.vimrc'))
-    source ~/.vim/base.vimrc
-endif
-
-if filereadable(expand('~/.vim/hotkeys.vimrc'))
-    source ~/.vim/hotkeys.vimrc
-endif
-
-if filereadable(expand('~/.vim/themes.vimrc'))
-    source ~/.vim/themes.vimrc
-endif
+for script in script_file
+    let file_path = base_path . '/' . script . '.vimrc'
+    exec 'source' . file_path
+endfor
 
 " End
 """"""""""""""""""""""""""""""""""""""""

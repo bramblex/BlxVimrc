@@ -42,6 +42,7 @@ set pastetoggle=<F5>
     nmap <leader>p "rp
 
 " 自动注释
+vmap / \c<space>
 nmap // \c<space>
 
 " End
