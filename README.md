@@ -18,6 +18,11 @@ $ rm ~/.vim ~/.vimrc -rf
 $ git clone https://github.com/bramblex/BlxVimrc.git ~/.vim
 ```
 
+###2.将 ~/.vim 的 vimrc 软链出来
+```sh
+$ ln -s ~/.vim/vimrc ~/.vimrc
+```
+
 ###3.安装vundle插件管理器
 ```sh
 $ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
