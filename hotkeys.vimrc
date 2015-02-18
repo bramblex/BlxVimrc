@@ -10,12 +10,12 @@ nmap <leader>q :q<CR>
 nmap <leader>w :w<CR>
 
 " 切換buffer
-" nmap <C-n> :MBEbn<CR>
-" nmap <C-p> :MBEbp<CR>
-" nmap <leader>d :MBEbd<CR>
-nmap <C-n> :bn<CR>
-nmap <C-p> :bp<CR>
-nmap <leader>d :bd<CR>
+nmap <C-n> :MBEbn<CR>
+nmap <C-p> :MBEbp<CR>
+nmap <leader>d :MBEbd<CR>
+"nmap <C-n> :bn<CR>
+"nmap <C-p> :bp<CR>
+"nmap <leader>d :bd<CR>
 
 " NERDTree快捷鍵
 nmap <leader>e :NERDTreeToggle<CR>

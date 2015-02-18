@@ -33,18 +33,8 @@ call vundle#begin()
 " 快速注释
     Bundle 'scrooloose/nerdcommenter'
 
-" 新的airline配置
-    Bundle 'bling/vim-airline'
-    " 状态栏设置
-    if !exists('g:airline_symbols')
-        let g:airline_symbols = {}
-    endif
-    let g:airline_powerline_fonts=1
-    let g:airline_symbols.linenr = '¶'
-    set statusline=%<%f\ %h%m%r%=%k[%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}]\ %-14.(%l,%c%V%)\ %P
-    set laststatus=2 "状态栏高度
-    " Smarter tab line
-    let g:airline#extensions#tabline#enabled = 1
+" MiniBufexpl.vim
+    Bundle 'fholgado/minibufexpl.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
