@@ -15,7 +15,7 @@ $ rm ~/.vim ~/.vimrc -rf
 
 ###2.直接clone到 ~/.vim
 ```sh
-$ git clone https://github.com/bramblex/BlxVimrc.git ~/vim
+$ git clone https://github.com/bramblex/BlxVimrc.git ~/.vim
 ```
 
 ###3.安装vundle插件管理器
