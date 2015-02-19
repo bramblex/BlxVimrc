@@ -12,7 +12,7 @@
 "   己写一个模块啥的。
 "
 "   模块定义的方法：
-"       1.再本目录下新建一个<my_module>.vimrc 的文件。
+"       1.在modules目录下新建一个<my_module>.vimrc 的文件。
 "
 "       2.声明一个需要注册的函数。
 "           function MyModule()
