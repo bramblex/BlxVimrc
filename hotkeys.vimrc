@@ -2,48 +2,53 @@
 """"""""""""""""""""""""""""""""""""""""
 " VIM快捷鍵設置
 
-" Leader鍵
-let mapleader='\'
+function Hotkeys()
 
-" 基本操作
-nmap <leader>q :q<CR>
-nmap <leader>w :w<CR>
+    " Leader鍵
+    let mapleader='\'
 
-" 切換buffer
-nmap <C-n> :MBEbn<CR>
-nmap <C-p> :MBEbp<CR>
-nmap <leader>d :MBEbd<CR>
-"nmap <C-n> :bn<CR>
-"nmap <C-p> :bp<CR>
-"nmap <leader>d :bd<CR>
+    " 基本操作
+    nmap <leader>q :q<CR>
+    nmap <leader>w :w<CR>
 
-" NERDTree快捷鍵
-nmap <leader>e :NERDTreeToggle<CR>
+    " 切換buffer
+    nmap <C-n> :MBEbn<CR>
+    nmap <C-p> :MBEbp<CR>
+    nmap <leader>d :MBEbd<CR>
+    "nmap <C-n> :bn<CR>
+    "nmap <C-p> :bp<CR>
+    "nmap <leader>d :bd<CR>
 
-" 窗口操作
-nmap <leader>v <C-w>v
-nmap <leader>s <C-w>s
+    " NERDTree快捷鍵
+    nmap <leader>e :NERDTreeToggle<CR>
 
-nmap <C-l> <C-w>l
-nmap <C-h> <C-w>h
-nmap <C-j> <C-w>j
-nmap <C-k> <C-w>k
+    " 窗口操作
+    nmap <leader>v <C-w>v
+    nmap <leader>s <C-w>s
 
-" 去除搜索後留下的高亮
-nmap <leader>/ :nohl<CR>
+    nmap <C-l> <C-w>l
+    nmap <C-h> <C-w>h
+    nmap <C-j> <C-w>j
+    nmap <C-k> <C-w>k
 
-" 粘貼模式
-set pastetoggle=<F5>
+    " 去除搜索後留下的高亮
+    nmap <leader>/ :nohl<CR>
 
-" 寄存器優化
+    " 粘貼模式
+    set pastetoggle=<F5>
 
-    " 利用寄存器
-    nmap <leader>y "ry
-    nmap <leader>p "rp
+    " 寄存器優化
 
-" 自动注释
-vmap / \c<space>
-nmap // \c<space>
+        " 利用寄存器
+        nmap <leader>y "ry
+        nmap <leader>p "rp
+
+    " 自动注释
+    vmap / \c<space>
+    nmap // \c<space>
+endfunction
+call Define('Hotkeys', ['Base', 'Bundle'], function('Hotkeys'))
+
 
 " End
 """"""""""""""""""""""""""""""""""""""""

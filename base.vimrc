@@ -1,21 +1,21 @@
 
 """"""""""""""""""""""""""""""""""""""""
 " VIM基礎設置
+function Base()
 
-" 开启语法高亮
-syntax on
+    " 开启语法高亮
+    syntax on
+    "检测文件类型
+    filetype on
+    "针对不同的文件类型采用不同的缩进格式
+    filetype indent on
+    "允许插件
+    filetype plugin on
+    "启动自动补全
+    filetype plugin indent on
 
-"检测文件类型
-filetype on
-"针对不同的文件类型采用不同的缩进格式
-filetype indent on
-"允许插件
-filetype plugin on
-"启动自动补全
-filetype plugin indent on
-
-" 文件修改之后自动载入。
-set autoread
+    " 文件修改之后自动载入。
+    set autoread
 
 " 突出显示当前，列
     set cursorcolumn
@@ -60,6 +60,9 @@ set autoread
     set smarttab      " insert tabs on the start of a line according to shiftwidth, not tabstop 按退格键时可以一次删掉 4 个空格
     set expandtab     " 将Tab自动转化成空格    [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
     set shiftround    " 缩进时，取整 use multiple of shiftwidth when indenting with '<' and '>'
+
+endfunction
+call Define('Base', ['Bundle'], function('Base'))
 
 " End
 """"""""""""""""""""""""""""""""""""""""
