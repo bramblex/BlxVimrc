@@ -44,6 +44,5 @@ function Bundle()
 endfunction
 call Define('Bundle', [], function('Bundle'))
 
-
 " End
 """"""""""""""""""""""""""""""""""
