@@ -54,7 +54,7 @@ function! g:Load(module_name)
     call l:Module()
 endfunction
 
-" 加载vimrc所在目录下所有模块的定义
+" 加载modules目录下所有模块的定义
 for i in split(globpath(s:base.'/modules','*.vimrc'))
     exec 'source' . i
     unlet i
