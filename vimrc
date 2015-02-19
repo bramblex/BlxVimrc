@@ -55,57 +55,56 @@ function! g:Load(module_name)
 endfunction
 
 " 加载vimrc所在目录下所有模块的定义
-for i in split(globpath(s:base,'*.vimrc'))
+for i in split(globpath(s:base.'/modules','*.vimrc'))
     exec 'source' . i
     unlet i
 endfor
 
-" 对模块进行拓扑排序
-" 弹出0入度的节点
-function! s:PopNode(require_list)
-
-    let l:module = ''
-
-    " 找到一个入度为0的节点
-    for i in range(0, len(a:require_list) - 1)
-
-        let m = a:require_list[i]
-        if empty(m[1])
-            let l:module = m[0]
-            call remove(a:require_list, i)
-            break
-        endif
-
-    endfor
-
-    " 找不到入度为0的节点时直接返回，进行错误处理
-    if l:module == ''
-        return l:module
-    endif
-
-    " 将所有依赖它的节点依赖删除
-    for i in range(0, len(a:require_list) - 1)
-
-        let m = a:require_list[i]
-        let r = index(m[1], l:module)
-        if r >= 0
-            call remove(m[1], r)
-        endif
-
-    endfor
-
-    " 弹出当前节点
-    return l:module
-endfunction
-
-"排序函数
+" 模块拓扑排序函数
 function! s:TopSort(require_dict)
+
+    " 弹出0入度的节点
+    function! PopNode(require_list)
+
+        let l:module = ''
+
+        " 找到一个入度为0的节点
+        for i in range(0, len(a:require_list) - 1)
+
+            let m = a:require_list[i]
+            if empty(m[1])
+                let l:module = m[0]
+                call remove(a:require_list, i)
+                break
+            endif
+
+        endfor
+
+        " 找不到入度为0的节点时直接返回，进行错误处理
+        if l:module == ''
+            return l:module
+        endif
+
+        " 将所有依赖它的节点依赖删除
+        for i in range(0, len(a:require_list) - 1)
+
+            let m = a:require_list[i]
+            let r = index(m[1], l:module)
+            if r >= 0
+                call remove(m[1], r)
+            endif
+
+        endfor
+
+        " 弹出当前节点
+        return l:module
+    endfunction
 
     let l:require_list = items(deepcopy(a:require_dict))
     let l:sorted_list = []
 
     while !empty(l:require_list)
-        let l:module = s:PopNode(l:require_list)
+        let l:module = PopNode(l:require_list)
         if l:module == ''
             echom 'Load Error:' . join(l:require_list, ', ')
             break
