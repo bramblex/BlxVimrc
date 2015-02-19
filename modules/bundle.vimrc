@@ -9,6 +9,8 @@ function Bundle()
     set rtp+=~/.vim/bundle/Vundle.vim
     call vundle#begin()
 
+    " @TODO 不能動態加載插件簡直無情……如果不行的花電視見自己造一個
+
     " Vundle插件管理器
         Plugin 'gmarik/Vundle.vim'
 

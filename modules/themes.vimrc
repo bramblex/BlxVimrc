@@ -1,6 +1,7 @@
 
 """"""""""""""""""""""""""""""""""""""""
 " VIM外觀配置
+
 function Themes()
 
     colorscheme molokai
@@ -22,17 +23,6 @@ function Themes()
     hi MBENormal guifg=darkgrey ctermfg=darkgrey
     hi MBEVisibleNormal cterm=underline guifg=grey ctermfg=grey
     hi MBEVisibleActiveNormal cterm=underline guifg=lightyellow ctermfg=lightyellow
-
-    
-    "hi MBEChanged guifg=darkgrey ctermfg=darkgrey
-    "hi MBENormal guifg=darkgrey ctermfg=darkgrey
-    "hi link MBEVisibleNormal MBENormal
-
-    "hi MBEVisibleActiveNormal cterm=underline guifg=darkgreen ctermfg=darkgreen
-    "hi MBEChanged guifg=brown ctermfg=brown
-    "hi link MBEVisibleChanged MBEChanged
-    "hi MBEVisibleActiveChanged cterm=underline guifg=darkred ctermfg=darkred
-
 
 endfunction
 call Define('Themes', ['Base', 'Bundle'], function('Themes'))

@@ -1,5 +1,4 @@
-
-""""""""""""""""""""""""""""""""""""""""
+﻿""""""""""""""""""""""""""""""""""""""""
 " BlxVimrc
 " auth:     brambles
 " email:    qjnight@gmail.com
@@ -21,7 +20,7 @@
 "
 "       3.最后注册函数。
 "           Define(模块名, 依赖的模块列表, 要注册的函数)
-"           call Define('MyModule', ['base', 'bundle'], function('MyModule'))
+"           call Define('MyModule', ['base', 'bundle'], fuqnction('MyModule'))
 
 let s:modules_define = {}
 let s:modules_require = {}
@@ -60,7 +59,7 @@ for i in split(globpath(s:base.'/modules','*.vimrc'))
     unlet i
 endfor
 
-" 模块拓扑排序函数
+" 把模塊進行拓撲排序
 function! s:TopSort(require_dict)
 
     " 弹出0入度的节点
@@ -116,7 +115,7 @@ function! s:TopSort(require_dict)
     return l:sorted_list
 endfunction
 
-" 加载化所有模块
+" 加载所有模块
 let s:modules_load = s:TopSort(s:modules_require)
 for module in s:modules_load
     call g:Load(module)
