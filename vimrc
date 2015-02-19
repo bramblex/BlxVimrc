@@ -95,13 +95,19 @@ function! s:TopSort(require_dict)
 
         endfor
 
-        " 弹出当前节点
+        " 彈出找到的節點
         return l:module
     endfunction
 
     let l:require_list = items(deepcopy(a:require_dict))
     let l:sorted_list = []
 
+    "
+    " 從require_list中彈出入度爲0的節點，直到全部節點彈出。
+    "
+    " 若require_list不爲空且找不到入度爲0的幾點，
+    " 則節點中存在不能處理的依賴(比如循環依賴，或者依賴不存在的模塊)
+    "
     while !empty(l:require_list)
         let l:module = PopNode(l:require_list)
         if l:module == ''
