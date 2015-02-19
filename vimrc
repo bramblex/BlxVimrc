@@ -30,12 +30,12 @@ let s:base = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 " 声明模块定义函数 Define
 function! g:Define(name, require, define)
     if has_key(s:modules_define, a:name)
-        echom 'Module Cannot Redefine!'
+        echo 'Module Cannot Redefine!'
         return
     endif
 
     if a:name == ''
-        echom 'Module Cannot Define By An Empty Name!'
+        echo 'Module Cannot Define By An Empty Name!'
         return
     endif
 
@@ -46,7 +46,7 @@ endfunction
 " 声明模块加载的函数　Load
 function! g:Load(module_name)
     if !has_key(s:modules_define, a:module_name)
-        echom 'Module not define:' . a:module_name
+        echo 'Module not define:' . a:module_name
         return
     endif
 
@@ -106,7 +106,8 @@ function! s:TopSort(require_dict)
     while !empty(l:require_list)
         let l:module = PopNode(l:require_list)
         if l:module == ''
-            echom 'Load Error:' . join(l:require_list, ', ')
+            echo 'Load Error:'
+            echo join(l:require_list, "\n")
             break
         endif
         call add(l:sorted_list, l:module)
