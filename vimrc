@@ -20,7 +20,7 @@
 "
 "       3.最后注册函数。
 "           Define(模块名, 依赖的模块列表, 要注册的函数)
-"           call Define('MyModule', ['base', 'bundle'], fuqnction('MyModule'))
+"           call Define('MyModule', ['Base', 'Bundle'], function('MyModule'))
 
 let s:modules_define = {}
 let s:modules_require = {}

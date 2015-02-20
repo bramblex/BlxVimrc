@@ -53,5 +53,5 @@ endfunction
 ####3.用之前聲明的函數註冊模塊。
 ```VimL
 Define(模塊名, 依賴的模塊列表, 之前聲明的函數)
-call Define('MyModule', ['base', 'bundle'], function('MyModule'))
+call Define('MyModule', ['Base', 'Bundle'], function('MyModule'))
 ```
