@@ -24,6 +24,9 @@ function Themes()
     hi MBEVisibleNormal cterm=underline guifg=grey ctermfg=grey
     hi MBEVisibleActiveNormal cterm=underline guifg=lightyellow ctermfg=lightyellow
 
+    " 更改molokai蛋疼選中的顏色
+    "hi Visual ctermbg=black guibg=black
+
 endfunction
 call Define('Themes', ['Base', 'Bundle'], function('Themes'))
 

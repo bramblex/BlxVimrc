@@ -55,7 +55,9 @@ endfunction
 
 " 加载modules目录下所有模块的定义
 for i in split(globpath(s:base.'/modules','*.vimrc'))
-    exec 'source' . i
+    if filereadable(expand(i))
+        exec 'source' . i
+    endif
     unlet i
 endfor
 

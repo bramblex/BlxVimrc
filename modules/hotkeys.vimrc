@@ -3,9 +3,11 @@
 " VIM快捷鍵設置
 
 function Hotkeys()
+    " <C-o><C-i> 回退以及追進光標位置
 
     " Leader鍵
     let mapleader='\'
+    let g:mapleader = '\'
 
     " 基本操作
     nmap <leader>q :q<CR>
@@ -46,8 +48,19 @@ function Hotkeys()
     " 自动注释
     vmap / \c<space>
     nmap // \c<space>
+
+    " 分屏幕同步滾動
+    nmap <leader>b :call ToggleScrollBindingAllWindows()<CR>
+
+    " 插入命令的輸出
+    " 例如：
+    "   1.輸入date則插入時間
+    "   2.輸入cal則插入日曆
+    "   3.輸入ls則插入當前目錄下的文件列表
+    nmap <leader>r :read!
+
 endfunction
-call Define('Hotkeys', ['Base', 'Bundle'], function('Hotkeys'))
+call Define('Hotkeys', ['Base', 'Bundle', 'Utils'], function('Hotkeys'))
 
 
 " End
