@@ -27,7 +27,7 @@ let s:modules_require = {}
 let s:base = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
 " 声明模块定义函数 Define
-function! g:Define(name, require, define)
+function g:Define(name, require, define)
     if has_key(s:modules_define, a:name)
         echo 'Module Cannot Redefine!'
         return
@@ -43,7 +43,7 @@ function! g:Define(name, require, define)
 endfunction
 
 " 声明模块加载的函数　Load
-function! g:Load(module_name)
+function g:Load(module_name)
     if !has_key(s:modules_define, a:module_name)
         echo 'Module not define:' . a:module_name
         return
@@ -60,10 +60,10 @@ for i in split(globpath(s:base.'/modules','*.vimrc'))
 endfor
 
 " 把模塊進行拓撲排序
-function! s:TopSort(require_dict)
+function s:TopSort(require_dict)
 
     " 弹出0入度的节点
-    function! PopNode(require_list)
+    function PopNode(require_list)
 
         let l:module = ''
 
