@@ -24,7 +24,15 @@
 
 let s:modules_define = {}
 let s:modules_require = {}
-let s:base = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+let g:blx_base_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+let g:blx_config_path = g:blx_base_path . '/config.vimrc'
+
+" 加載配置文件 config.vimrc
+if filereadable(g:blx_config_path)
+    exec 'source' . g:blx_config_path
+else
+    echom 'Can not read config file!'
+endif
 
 " 声明模块定义函数 Define
 function g:Define(name, require, define)
@@ -54,7 +62,7 @@ function g:Load(module_name)
 endfunction
 
 " 加载modules目录下所有模块的定义
-for i in split(globpath(s:base.'/modules','*.vimrc'))
+for i in split(globpath(g:blx_modules_path, '*.vimrc'))
     if filereadable(expand(i))
         exec 'source' . i
     endif
