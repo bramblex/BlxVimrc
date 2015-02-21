@@ -9,7 +9,7 @@ function Utils()
     "
     
     " 分屏同步滾動函數
-    function g:ToggleScrollBindingAllWindows()
+    function g:ToggleScrollBinding()
         if !&scb
             windo set scb
         else

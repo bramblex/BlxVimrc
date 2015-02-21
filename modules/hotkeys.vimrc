@@ -10,13 +10,13 @@ function Hotkeys()
     let g:mapleader = '\'
 
     " 基本操作
-    nmap <leader>q :q<CR>
-    nmap <leader>w :w<CR>
+    nmap <leader>q :q<cr>
+    nmap <leader>w :w<cr>
 
     " 切換buffer
-    nmap <C-n> :MBEbn<CR>
-    nmap <C-p> :MBEbp<CR>
-    nmap <leader>d :MBEbd<CR>
+    nmap <C-n> :MBEbn<cr>
+    nmap <C-p> :MBEbp<cr>
+    nmap <leader>d :MBEbd<cr>
     "nmap <C-n> :bn<CR>
     "nmap <C-p> :bp<CR>
     "nmap <leader>d :bd<CR>
@@ -34,7 +34,7 @@ function Hotkeys()
     nmap <C-k> <C-w>k
 
     " 去除搜索後留下的高亮
-    nmap <leader>/ :nohl<CR>
+    nmap <leader>/ :nohl<cr>
 
     " 粘貼模式
     set pastetoggle=<F5>
@@ -50,7 +50,7 @@ function Hotkeys()
     nmap // \c<space>
 
     " 分屏幕同步滾動
-    nmap <leader>b :call ToggleScrollBindingAllWindows()<CR>
+    nmap <leader>b :call ToggleScrollBinding()<cr>
 
     " 插入命令的輸出
     " 例如：
@@ -64,7 +64,12 @@ function Hotkeys()
     " d     create a new directory
     " R     rename the file/directory
     " D     Delete the file/directory
-    nmap <leader>e :call ToggleExplore()<CR>
+    nmap <leader>e :call ToggleExplore()<cr>
+
+    " Git相關
+    nmap <leader>g :!git 
+    nmap <leader>gc :!git add -A && git commit -a<cr>
+    nmap <leader>gp :!git push<cr>
 
 endfunction
 call Define('Hotkeys', ['Base', 'Bundle', 'Utils', 'Netrw'], function('Hotkeys'))
