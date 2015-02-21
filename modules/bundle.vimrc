@@ -17,10 +17,6 @@ function Bundle()
     " molokai配色
         Plugin 'tomasr/molokai'
 
-    " NERDTree好用的文件管理器
-        Plugin 'scrooloose/nerdtree.git'
-        let g:NERDTreeWinSize=38
-
     " SuperTab 把补全键换成Tab
         Bundle "ervandew/supertab"
         let g:SuperTabDefaultCompletionType = '<C-n>'

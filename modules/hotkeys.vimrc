@@ -22,7 +22,7 @@ function Hotkeys()
     "nmap <leader>d :bd<CR>
 
     " NERDTree快捷鍵
-    nmap <leader>e :NERDTreeToggle<CR>
+    "nmap <leader>e :NERDTreeToggle<CR>
 
     " 窗口操作
     nmap <leader>v <C-w>v
@@ -59,8 +59,15 @@ function Hotkeys()
     "   3.輸入ls則插入當前目錄下的文件列表
     nmap <leader>r :read!
 
+    " 文件管理器快捷鍵
+    " %     create a new file
+    " d     create a new directory
+    " R     rename the file/directory
+    " D     Delete the file/directory
+    nmap <leader>e :call ToggleExplore()<CR>
+
 endfunction
-call Define('Hotkeys', ['Base', 'Bundle', 'Utils'], function('Hotkeys'))
+call Define('Hotkeys', ['Base', 'Bundle', 'Utils', 'Netrw'], function('Hotkeys'))
 
 
 " End

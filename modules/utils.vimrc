@@ -17,6 +17,16 @@ function Utils()
         endif
     endfunction
 
+    " 開關文件管理器
+    function g:ToggleExplore()
+        let l:path_tail = expand('%:p:t')
+        if l:path_tail != ''
+            Explore
+        else
+            blast
+        endif
+    endfunction
+
 endfunction
 call Define('Utils', ['Base', 'Bundle'], function('Utils'))
 
