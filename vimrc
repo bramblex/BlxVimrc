@@ -32,6 +32,7 @@ if filereadable(g:blx_config_path)
     exec 'source' . g:blx_config_path
 else
     echom 'Can not read config file!'
+    exit
 endif
 
 " 声明模块定义函数 Define
