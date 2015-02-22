@@ -8,9 +8,8 @@ function Netrw()
     
     let g:netrw_liststyle=1
 
-    au BufEnter * :call RecordLastLeaveBuffer()
-
     " 記錄一下坑爹的東西
+    au BufEnter * :call RecordLastLeaveBuffer()
     function g:RecordLastLeaveBuffer()
         if expand('%:p:t') != ''
             let t:last_leave_buffer = bufnr('%')

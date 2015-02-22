@@ -1,3 +1,2 @@
 這是一個測試{{ g:blx_modules_path }}
-
 這是測試輸入{{ s:GetWInput('請輸入非空值：') }}
