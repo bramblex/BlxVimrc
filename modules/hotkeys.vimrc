@@ -70,6 +70,7 @@ function Hotkeys()
     nmap <leader>g :!git 
     nmap <leader>gc :!git add -A && git commit -a<cr>
     nmap <leader>gp :!git push<cr>
+    nmap <leader>gs :!git status<cr>
 
     " 輸出模板
     nmap <Leader>t :call g:RenderTemplate()<cr>
