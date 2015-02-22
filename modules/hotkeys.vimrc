@@ -71,6 +71,9 @@ function Hotkeys()
     nmap <leader>gc :!git add -A && git commit -a<cr>
     nmap <leader>gp :!git push<cr>
 
+    " 輸出模板
+    nmap <Leader>t :call g:RenderTemplate()<cr>
+
 endfunction
 call Define('Hotkeys', ['Base', 'Bundle', 'Utils', 'Netrw'], function('Hotkeys'))
 

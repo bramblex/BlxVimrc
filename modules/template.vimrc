@@ -13,7 +13,8 @@ function Template()
     " put @[寄存器]      插入寄存器內容
     " readfile()    讀取文件
 
-    function s:GetInput(info, default)
+    " 帶默認值的input
+    function s:GetDInput(info, default)
         let value = input(a:info)
         if value == ''
             return a:default
@@ -21,42 +22,72 @@ function Template()
             return value
         endif
     endfunction
+
+    " 循環，直到接受到非空值
+    function s:GetWInput(info)
+        let value = ''
+        while value == ''
+            let value = input(a:info)
+        endwhile
+        return value
+    endfunction
+
+    " @TODO 循環，直到接受到正確的值，用正則判斷
+    "function s:GetRInput(info)
+    "endfunction
     
+    " 讀取文件，並且轉化爲字符串
     function s:ReadFile(path)
         let file_string = ''
         if filereadable(a:path)
-            let file_string = join(readfile(a:path))
+            let file_string = join(readfile(a:path), "\n")
         endif
         return file_string
     endfunction
 
+    " 執行內嵌在模板內的代碼並返回結果
     function s:GetValue(code)
         exec 'let tmp = ' . a:code
         return tmp
     endfunction
 
+    " 利用t寄存器插入文字
     function s:InsertText(text)
         let @t = a:text
         put t
     endfunction
 
+    " 補全模板完整路徑
     function s:GetTemplate(template)
         return s:ReadFile( g:blx_template_path . '/' . a:template )
     endfunction
     
-    function g:Render(template)
+    " 渲染模板
+    function s:Render(template)
         let template = s:GetTemplate(a:template)
+
+        if template == ''
+            echo '未找到模板：' . a:template '，或模板爲空'
+            return
+        endif
+
         let pieces = split(l:template, g:blx_template_close_token)
 
-        for i in range(0,len(l:pieces)-1)
-            let piece = split(l:pieces, g:blx_template_start_token)
-            let stirng = piece[0]
-            let code = pieces[1]
+        for i in range(0,len(pieces)-1)
+            let piece = split(pieces[i], g:blx_template_start_token)
+            let str = piece[0]
+            let code = piece[1]
 
-            let pieces[i] = string + s:GetValue(code)
+            let pieces[i] = str . s:GetValue(code)
         endfor
 
-        s:InsertText(join(pieces))
+        call s:InsertText(join(pieces))
+    endfunction
+
+    " 對外接口，優化輸入
+    function g:RenderTemplate()
+        let t = s:GetWInput('請輸入模板名：')
+        call s:Render(t)
     endfunction
 
 endfunction
