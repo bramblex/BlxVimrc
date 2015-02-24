@@ -43,7 +43,7 @@ function Hotkeys()
 
         " 利用寄存器
         nmap <leader>y "ry
-        nmap <leader>p "rp
+        nmap <leader>p "rP
 
     " 自动注释
     vmap / \c<space>
