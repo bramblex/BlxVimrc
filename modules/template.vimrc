@@ -12,6 +12,9 @@ function Template()
     " let @[寄存器] = <string>
     " put @[寄存器]      插入寄存器內容
     " readfile()    讀取文件
+    let s:template_path = g:config['template_path']
+    let s:template_start_token = g:config['template_start_token']
+    let s:template_close_token = g:config['template_close_token']
 
     " 帶默認值的input
     function s:GetDInput(info, default)
@@ -59,7 +62,7 @@ function Template()
 
     " 補全模板完整路徑
     function s:GetTemplate(template)
-        return s:ReadFile( g:blx_template_path . '/' . a:template )
+        return s:ReadFile( s:template_path . '/' . a:template )
     endfunction
     
     " 渲染模板
@@ -71,10 +74,10 @@ function Template()
             return
         endif
 
-        let pieces = split(l:template, g:blx_template_close_token)
+        let pieces = split(l:template, s:template_close_token)
 
         for i in range(0,len(pieces)-1)
-            let piece = split(pieces[i], g:blx_template_start_token)
+            let piece = split(pieces[i], s:template_start_token)
             let str = piece[0]
             let code = piece[1]
 
