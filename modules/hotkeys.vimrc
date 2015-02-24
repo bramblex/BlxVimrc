@@ -50,7 +50,7 @@ function Hotkeys()
     nmap // \c<space>
 
     " 分屏幕同步滾動
-    nmap <leader>b :call ToggleScrollBinding()<cr>
+    nmap <leader>b :call g:ToggleScrollBinding()<cr>
 
     " 插入命令的輸出
     " 例如：
@@ -64,7 +64,7 @@ function Hotkeys()
     " d     create a new directory
     " R     rename the file/directory
     " D     Delete the file/directory
-    nmap <leader>e :call ToggleExplore()<cr>
+    nmap <leader>e :call g:ToggleExplore()<cr>
 
     " Git相關
     nmap <leader>g :!git 
@@ -76,7 +76,7 @@ function Hotkeys()
     nmap <Leader>t :call g:RenderTemplate()<cr>
 
 endfunction
-call Define('Hotkeys', ['Base', 'Bundle', 'Utils', 'Netrw'], function('Hotkeys'))
+call g:Define('Hotkeys', ['Base', 'Bundle', 'Utils', 'Netrw'], function('Hotkeys'))
 
 
 " End

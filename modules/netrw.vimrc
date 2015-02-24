@@ -9,7 +9,7 @@ function Netrw()
     let g:netrw_liststyle=1
 
     " 記錄一下坑爹的東西
-    au BufEnter * :call RecordLastLeaveBuffer()
+    au BufEnter * :call g:RecordLastLeaveBuffer()
     function g:RecordLastLeaveBuffer()
         if expand('%:p:t') != ''
             let t:last_leave_buffer = bufnr('%')
@@ -27,7 +27,7 @@ function Netrw()
     
 
 endfunction
-call Define('Netrw', ['Base', 'Bundle', 'Utils'], function('Netrw'))
+call g:Define('Netrw', ['Base', 'Bundle', 'Utils'], function('Netrw'))
 
 " End
 """"""""""""""""""""""""""""""""""""""""

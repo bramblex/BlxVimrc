@@ -17,7 +17,7 @@ function Utils()
     endfunction
 
 endfunction
-call Define('Utils', ['Base', 'Bundle'], function('Utils'))
+call g:Define('Utils', ['Base', 'Bundle'], function('Utils'))
 
 " End
 """"""""""""""""""""""""""""""""""""""""

@@ -40,7 +40,7 @@ function Bundle()
     filetype plugin indent on    " required
 
 endfunction
-call Define('Bundle', [], function('Bundle'))
+call g:Define('Bundle', [], function('Bundle'))
 
 " End
 """"""""""""""""""""""""""""""""""

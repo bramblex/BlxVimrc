@@ -91,7 +91,7 @@ function Template()
     endfunction
 
 endfunction
-call Define('Template', ['Base', 'Bundle', 'Utils'], function('Template'))
+call g:Define('Template', ['Base', 'Bundle', 'Utils'], function('Template'))
 
 " End
 """"""""""""""""""""""""""""""""""""""""

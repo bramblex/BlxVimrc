@@ -7,13 +7,14 @@ function Themes()
     colorscheme molokai
     let g:molokai_original=1
     set t_Co=256
+    let g:rehash256 = 1
 
     " 命令行（在状态行下）的高度，默认为1，这里是2
     set statusline=%<%f\ %h%m%r%=%k[%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}]\ %-14.(%l,%c%V%)\ %P
 
     " 行列的高亮顏色
-    hi CursorLine   cterm=NONE ctermbg=black ctermfg=NONE guibg=black guifg=NONE
-    hi CursorColumn cterm=NONE ctermbg=black ctermfg=NONE guibg=black guifg=NONE
+    "hi CursorLine   cterm=NONE ctermbg=black ctermfg=NONE guibg=black guifg=NONE
+    "hi CursorColumn cterm=NONE ctermbg=black ctermfg=NONE guibg=black guifg=NONE
 
     " minibufexpl 的颜色设置
     " MBENormal
@@ -31,7 +32,7 @@ function Themes()
     "hi Visual ctermbg=black guibg=black
 
 endfunction
-call Define('Themes', ['Base', 'Bundle'], function('Themes'))
+call g:Define('Themes', ['Base', 'Bundle'], function('Themes'))
 
 " End
 """"""""""""""""""""""""""""""""""""""""

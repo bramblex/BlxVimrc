@@ -62,7 +62,7 @@ function Base()
     set shiftround    " 缩进时，取整 use multiple of shiftwidth when indenting with '<' and '>'
 
 endfunction
-call Define('Base', ['Bundle'], function('Base'))
+call g:Define('Base', ['Bundle'], function('Base'))
 
 " End
 """"""""""""""""""""""""""""""""""""""""
