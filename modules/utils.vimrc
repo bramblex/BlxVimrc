@@ -16,6 +16,37 @@ function Utils()
         endif
     endfunction
 
+    " 一些辅助函数
+
+    " split()的进阶版本
+    "function g:SplitPro(string, separator_list, keep_separator)
+        "let l:pieces = [string]
+        "for separator in separator_list
+            "for i in range(0, l:pieces-1)
+                "l:pieces[i] = split()
+            "endfor
+        "endfor
+    "endfunction
+
+    """""""""""""""""""""""""""""""""""""""""
+    " String 相关操作
+
+    """""""""""""""""""""""""""""""""""""""""
+    " List 相关操作
+
+    " Reduce()扁平化多维数组
+    function g:Reduce(m_l)
+    endfunction
+
+    " Map()
+    function g:Map(li, func)
+    endfunction
+
+    " Filter()
+    function g:Filter(li, func)
+    endfunction
+
+
 endfunction
 call g:Define('Utils', ['Base', 'Bundle'], function('Utils'))
 

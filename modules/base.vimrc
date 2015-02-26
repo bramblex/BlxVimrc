@@ -61,6 +61,10 @@ function Base()
     set expandtab     " 将Tab自动转化成空格    [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
     set shiftround    " 缩进时，取整 use multiple of shiftwidth when indenting with '<' and '>'
 
+    " 关闭备份
+    set nobackup
+    set noswapfile
+
 endfunction
 call g:Define('Base', ['Bundle'], function('Base'))
 

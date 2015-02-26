@@ -5,9 +5,7 @@
 function Themes()
 
     colorscheme molokai
-    let g:molokai_original=1
     set t_Co=256
-    let g:rehash256 = 1
 
     " 命令行（在状态行下）的高度，默认为1，这里是2
     set statusline=%<%f\ %h%m%r%=%k[%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}]\ %-14.(%l,%c%V%)\ %P
@@ -31,6 +29,7 @@ function Themes()
     " 更改molokai蛋疼選中的顏色
     "hi Visual ctermbg=black guibg=black
 
+    set background=dark
 endfunction
 call g:Define('Themes', ['Base', 'Bundle'], function('Themes'))
 
