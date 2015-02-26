@@ -10,31 +10,31 @@ function Hotkeys()
     let g:mapleader = '\'
 
     " 基本操作
-    nmap <leader>q :q<cr>
-    nmap <leader>w :w<cr>
+    nnoremap <leader>q :q<cr>
+    nnoremap <leader>w :w<cr>
 
     " 切換buffer
-    nmap <C-n> :MBEbn<cr>
-    nmap <C-p> :MBEbp<cr>
-    nmap <leader>d :MBEbd<cr>
-    "nmap <C-n> :bn<CR>
-    "nmap <C-p> :bp<CR>
-    "nmap <leader>d :bd<CR>
+    nnoremap <C-n> :MBEbn<cr>
+    nnoremap <C-p> :MBEbp<cr>
+    nnoremap <leader>d :MBEbd<cr>
+    "nnoremap <C-n> :bn<CR>
+    "nnoremap <C-p> :bp<CR>
+    "nnoremap <leader>d :bd<CR>
 
     " NERDTree快捷鍵
-    "nmap <leader>e :NERDTreeToggle<CR>
+    "nnoremap <leader>e :NERDTreeToggle<CR>
 
     " 窗口操作
-    nmap <leader>v <C-w>v
-    nmap <leader>s <C-w>s
+    nnoremap <leader>v <C-w>v
+    nnoremap <leader>s <C-w>s
 
-    nmap <C-l> <C-w>l
-    nmap <C-h> <C-w>h
-    nmap <C-j> <C-w>j
-    nmap <C-k> <C-w>k
+    nnoremap <C-l> <C-w>l
+    nnoremap <C-h> <C-w>h
+    nnoremap <C-j> <C-w>j
+    nnoremap <C-k> <C-w>k
 
     " 去除搜索後留下的高亮
-    nmap <leader>/ :nohl<cr>
+    nnoremap <leader>/ :nohl<cr>
 
     " 粘貼模式
     set pastetoggle=<F5>
@@ -42,38 +42,39 @@ function Hotkeys()
     " 寄存器優化
 
         " 利用寄存器
-        nmap <leader>y "ry
-        nmap <leader>p "rP
+        nnoremap <leader>y "ry
+        nnoremap <leader>p "rP
 
     " 自动注释
     vmap / \c<space>
     nmap // \c<space>
+    imap <C-\>/ <esc>\c<space>$a
 
     " 分屏幕同步滾動
-    nmap <leader>b :call g:ToggleScrollBinding()<cr>
+    nnoremap <leader>b :call g:ToggleScrollBinding()<cr>
 
     " 插入命令的輸出
     " 例如：
     "   1.輸入date則插入時間
     "   2.輸入cal則插入日曆
     "   3.輸入ls則插入當前目錄下的文件列表
-    nmap <leader>r :read!
+    nnoremap <leader>r :read!
 
     " 文件管理器快捷鍵
     " %     create a new file
     " d     create a new directory
     " R     rename the file/directory
     " D     Delete the file/directory
-    nmap <leader>e :call g:ToggleExplore()<cr>
+    nnoremap <leader>e :call g:ToggleExplore()<cr>
 
     " Git相關
-    nmap <leader>g :!git 
-    nmap <leader>gc :!git add -A && git commit -a<cr>
-    nmap <leader>gp :!git push<cr>
-    nmap <leader>gs :!git status<cr>
+    nnoremap <leader>g :!git 
+    nnoremap <leader>gc :!git add -A && git commit -a<cr>
+    nnoremap <leader>gp :!git push<cr>
+    nnoremap <leader>gs :!git status<cr>
 
     " 輸出模板
-    nmap <Leader>t :call g:RenderTemplate()<cr>
+    nnoremap <Leader>t :call g:RenderTemplate()<cr>
 
 endfunction
 call g:Define('Hotkeys', ['Base', 'Bundle', 'Utils', 'Netrw'], function('Hotkeys'))

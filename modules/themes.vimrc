@@ -27,7 +27,7 @@ function Themes()
     hi MBEVisibleActiveNormal cterm=underline guifg=lightyellow ctermfg=lightyellow
 
     " 更改molokai蛋疼選中的顏色
-    "hi Visual ctermbg=black guibg=black
+    hi Visual ctermbg=lightgrey guibg=lightgrey
 
     set background=dark
 endfunction
