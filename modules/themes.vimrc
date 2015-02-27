@@ -4,7 +4,10 @@
 
 function Themes()
 
+    let g:molokai_original = 1
+    let g:molokai_original_background = 1
     colorscheme molokai
+    "colorscheme monokai
     set t_Co=256
 
     " 命令行（在状态行下）的高度，默认为1，这里是2
@@ -27,9 +30,9 @@ function Themes()
     hi MBEVisibleActiveNormal cterm=underline guifg=lightyellow ctermfg=lightyellow
 
     " 更改molokai蛋疼選中的顏色
-    hi Visual ctermbg=lightgrey guibg=lightgrey
+    "hi Visual ctermbg=lightgrey guibg=lightgrey
 
-    set background=dark
+    "set background=dark
 endfunction
 call g:Define('Themes', ['Base', 'Bundle'], function('Themes'))
 

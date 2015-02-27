@@ -18,7 +18,7 @@ function Base()
     set autoread
 
 " 突出显示当前，列
-    set cursorcolumn
+    "set cursorcolumn
     set cursorline
 
 " 去掉输入错误的提示声音

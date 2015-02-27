@@ -14,8 +14,8 @@ function Bundle()
     " Vundle插件管理器
         Plugin 'gmarik/Vundle.vim'
 
-    " molokai配色
-        Plugin 'tomasr/molokai'
+    " BlxMolokai
+        Plugin 'bramblex/molokai'
 
     " SuperTab 把补全键换成Tab
         Bundle "ervandew/supertab"
