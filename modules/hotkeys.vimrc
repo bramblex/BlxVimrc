@@ -65,7 +65,8 @@ function Hotkeys()
     " d     create a new directory
     " R     rename the file/directory
     " D     Delete the file/directory
-    nnoremap <leader>e :call g:ToggleExplore()<cr>
+    " nnoremap <leader>e :call g:ToggleExplore()<cr>
+    nnoremap <leader>e :NERDTreeToggle<cr>
 
     " Git相關
     nnoremap <leader>g :!git 
@@ -76,8 +77,22 @@ function Hotkeys()
     " 輸出模板
     nnoremap <Leader>t :call g:RenderTemplate()<cr>
 
+    "   选择替换搜索
+    nnoremap <leader>S :%s///g<left><left><left>
+    vnoremap <leader>S :s///g<left><left><left>
+
+    " Ruby on Rails 快捷键设定
+    nnoremap <leader><leader>r :!rails 
+
+    nnoremap <leader><leader>rg :!rails generate 
+    nnoremap <leader><leader>rgc :!rails generate controller 
+    nnoremap <leader><leader>rgm :!rails generate model 
+
+    nnoremap <leader><leader>rgd :!rails generate migrate 
+    nnoremap <leader><leader>rdm :!rake  db:migrate 
+
 endfunction
-call g:Define('Hotkeys', ['Base', 'Bundle', 'Utils', 'Netrw'], function('Hotkeys'))
+call g:Define('Hotkeys', ['Base', 'Bundle', 'Utils'], function('Hotkeys'))
 
 
 " End

@@ -36,6 +36,12 @@ function Bundle()
     " MiniBufexpl.vim
         Bundle 'fholgado/minibufexpl.vim'
 
+    " NredTree
+        Bundle 'scrooloose/nerdtree'
+
+    " vim-rails
+        "Bundle 'tpope/vim-rails'
+
     call vundle#end()            " required
     filetype plugin indent on    " required
 

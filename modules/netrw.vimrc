@@ -9,12 +9,13 @@ function Netrw()
     let g:netrw_liststyle=1
 
     " 記錄一下坑爹的東西
-    au BufEnter * :call g:RecordLastLeaveBuffer()
+    au * :call g:RecordLastLeaveBuffer()
+    au * :call g:RecordLastLeaveBuffer()
 
-    let t:last_leave_buffer = 1
+    let t:last_file_buffer = 1
     function g:RecordLastLeaveBuffer()
         if expand('%:p:t') != ''
-            let t:last_leave_buffer = bufnr('%')
+            let t:last_file_buffer = bufnr('%')
         end
     endfunction
 
@@ -24,13 +25,13 @@ function Netrw()
         if expand('%:p:t') != '' || @% == ''
             Explore
         else
-            exec 'b' . t:last_leave_buffer
+            exec 'b' . t:last_file_buffer
         endif
     endfunction
     
 
 endfunction
-call g:Define('Netrw', ['Base', 'Bundle', 'Utils'], function('Netrw'))
+"call g:Define('Netrw', ['Base', 'Bundle', 'Utils'], function('Netrw'))
 
 " End
 """"""""""""""""""""""""""""""""""""""""

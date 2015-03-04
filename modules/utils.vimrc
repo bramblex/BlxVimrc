@@ -9,6 +9,7 @@ function Utils()
     
     " 分屏同步滾動函數
     function g:ToggleScrollBinding()
+        let current_window = winnr()
         if !&scb
             windo set scb
         else
@@ -19,14 +20,11 @@ function Utils()
     " 一些辅助函数
 
     " split()的进阶版本
-    "function g:SplitPro(string, separator_list, keep_separator)
-        "let l:pieces = [string]
-        "for separator in separator_list
-            "for i in range(0, l:pieces-1)
-                "l:pieces[i] = split()
-            "endfor
-        "endfor
-    "endfunction
+    function g:SplitPro(string, separator_list)
+
+        let string = deepcopy(a:string)
+
+    endfunction
 
     """""""""""""""""""""""""""""""""""""""""
     " String 相关操作
@@ -34,9 +32,22 @@ function Utils()
     """""""""""""""""""""""""""""""""""""""""
     " List 相关操作
 
-    " Reduce()扁平化多维数组
-    function g:Reduce(m_l)
-    endfunction
+    " Reduce()平坦化多维数组
+    "function g:Reduce(m_l)
+        "let l  = deepcopy(a:m_l)
+
+        "for i in range(0, len(m_1)-1)
+            "if type(l[i]) ==  type([])
+                "let s_l = g:Reduce(remove(l, i))
+
+                "for j in reverse(range(0, len(l)-1))
+                    "insert(l, s_l[j], i)
+                "endfor
+
+            "endif
+        "endfor
+        "return l
+    "endfunction
 
     " Map()
     function g:Map(li, func)

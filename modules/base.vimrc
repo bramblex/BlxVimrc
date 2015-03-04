@@ -65,6 +65,8 @@ function Base()
     set nobackup
     set noswapfile
 
+    set clipboard+=unnamed " 共享剪贴板
+
 endfunction
 call g:Define('Base', ['Bundle'], function('Base'))
 
