@@ -27,7 +27,7 @@ function! g:Path()
 endfunction
 
 function! g:Modules()
-    return s:Modules
+    return deepcopy(s:Modules)
 endfunction
 
 " 缓存变量
@@ -65,6 +65,7 @@ function! g:Require(module)
 
     if !has_key(s:Modules, module)
         echo 'Can not find module: ' . module
+        call remove(s:pre_load_tmp, index(s:pre_load_tmp, module))
     endif
 
     return 0
@@ -84,4 +85,13 @@ function! g:Public(...)
                     \func))
     endfor
     return join(result_list)
+endfunction
+
+function! g:Info(key, value)
+
+    let template = "let g:Tmp[%s]['__module__']['%s'] = ('%s')"
+    return printf(template,
+                    \"split(expand('<sfile>:t'), '\\.')[-2]",
+                    \a:key,
+                    \a:value)
 endfunction
