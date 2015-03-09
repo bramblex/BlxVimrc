@@ -1,10 +1,10 @@
 #BlxVimrc
-1. [簡介](#簡介)
+1. [简介](#简介)
 2. [安装使用](#安装使用)
-3. [擴展](#擴展)
+3. [扩展](#扩展)
 
-##簡介:
-BlxVimrc是本人使用的VIM編輯器配置，使用Vundle做插件管理器。這套VIM配置並不追求花哨的功能以及絢麗的外觀，當然也更不會讓你把你的VIM僞裝成一個IDE。我們只做好最基本的最適用的編輯功能，爲的是更好的來使用VIM的編輯功能。
+##简介:
+BlxVimrc是本人使用的VIM编辑器配置，使用Vundle做插件管理器。这套VIM配置并不追求花哨的功能以及绚丽的外观，当然也更不会让你把你的VIM伪装成一个IDE。我们只做好最基本的最适用的编辑功能，为的是更好的来使用VIM的编辑功能。
 
 ##安装使用：
 ###1.备份或者删除 ~/.vim, ~/.vimrc 等配置文件
@@ -36,22 +36,32 @@ $ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 ###5.等待插件安装完毕后重启vim
 
-##擴展:
-vimrc 只是一個模塊裝載器，會自動裝載在modules目錄下的所有模塊，並且會自動處理依賴。 所以如果自己有要求想加入什麼的話，自己自己寫一個模塊放在modules目錄下便可以了
+##扩展:
+vimrc 只是一个模块装载器，会自动装载在modules目录下的所有模块，并且会自动处理依赖。 所以如果自己有要求想加入什麼的话，自己自己写一个模块放在modules目录下便可以了
 
-###模塊定義的方法：
-
-####1.在modules目錄下新建一個 <my_module>.vimrc 。
-
-####2.聲明一個需要註冊的函數。
+###添加模块寻址路径
+当然也可以在任何地方动态添加模块的寻址路径：
 ```VimL
-function MyModule()
-    " 随便干点啥
-endfunction
+  call add(Path(), 'path')
 ```
 
-####3.用之前聲明的函數註冊模塊。
+
+###模块定义的方法：
+模块的定义非常简单，只需要在模块的寻找路径里面加入一个 xxx.vimrc。并且将需要暴露出来的函数接口通过 exec Public()暴露出来就可以了。
+
 ```VimL
-Define(模塊名, 依賴的模塊列表, 之前聲明的函數)
-call Define('MyModule', ['Base', 'Bundle'], function('MyModule'))
+  "mymodule.vimrc
+  function s:TestModule()
+    echo 'test'
+  endfuntion
+
+  exec Public('s:TestModule')
+```
+
+###模块的调用：
+可以通过 ```Require module_name`` 或者 ```let module = Require('module_name') ```来调用模块
+
+```VimL
+  let mymodule = Require('mymodule')
+  call mymodule.TestModule() "=> 输出'test'
 ```

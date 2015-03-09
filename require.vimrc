@@ -8,19 +8,9 @@
 "
 "
 
-" 储存已加载的模块列表。
-function! Get(value, default)
-    if exists(a:value)
-        exec 'return '.a:value
-    else
-        return a:default
-    endif
-endfunction
-
 "  配置
 let s:path = add([], fnamemodify(resolve(expand('<sfile>:p')), ':h'))
 let s:Modules = {}
-
 
 function! g:Path()
     return s:path
