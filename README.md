@@ -37,7 +37,6 @@ $ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ###5.等待插件安装完毕后重启vim
 
 ##扩展:
-vimrc 只是一个模块装载器，会自动装载在modules目录下的所有模块，并且会自动处理依赖。 所以如果自己有要求想加入什麼的话，自己自己写一个模块放在modules目录下便可以了
 
 ###添加模块寻址路径
 当然也可以在任何地方动态添加模块的寻址路径：

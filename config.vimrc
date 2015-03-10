@@ -10,6 +10,7 @@ let s:config['base_path'] = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
 " 找库的路径
 call add(Path(), s:config['base_path'] . '/modules')
+call add(Path(), s:config['base_path'] . '/utils')
 
 function s:Get(key)
     return s:config[a:key]
