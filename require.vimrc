@@ -67,7 +67,7 @@ command! -nargs=1 Require call g:Require(<f-args>)
 " 元函数，用 exec 调用
 function! g:Public(...)
     let result_list = []
-    let template = "let g:Tmp[%s]['%s'] = function('%s')"
+    let template = "let g:Tmp[%s]['%s'] = function('%s')\n"
     for func in a:000
         call add(result_list, printf(template,
                     \"split(expand('<sfile>:t'), '\\.')[-2]",
@@ -79,7 +79,7 @@ endfunction
 
 function! g:Info(key, value)
 
-    let template = "let g:Tmp[%s]['__module__']['%s'] = ('%s')"
+    let template = "let g:Tmp[%s]['__module__']['%s'] = ('%s')\n"
     return printf(template,
                     \"split(expand('<sfile>:t'), '\\.')[-2]",
                     \a:key,
