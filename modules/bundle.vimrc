@@ -37,11 +37,11 @@ call vundle#begin()
 " NredTree
     Bundle 'scrooloose/nerdtree'
 
-" vim-rails
-    "Bundle 'tpope/vim-rails'
-    
 " mileszs/ack.vim
     Bundle 'mileszs/ack.vim'
+
+" sheerun/vim-polyglot
+    Bundle 'sheerun/vim-polyglot'
 
 call vundle#end()            " required
 filetype plugin indent on    " required

@@ -81,6 +81,7 @@ nnoremap <leader>S :%s///g<left><left><left>
 vnoremap <leader>S :s///g<left><left><left>
 
 Require hotkeys/rails
+Require hotkeys/dict
 
 " End
 """"""""""""""""""""""""""""""""""""""""
