@@ -10,7 +10,6 @@ endfunction
 function! s:GetSelectOnALine()
     return getline("'<")[getpos("'<")[2]-1: getpos("'>")[2]-1]
 endfunction
-exec Public('s:GetSelectOnALine')
 
 function! s:SetTabWidth(n)
     let n = a:n
@@ -22,4 +21,18 @@ function! s:SetTabWidth(n)
             \"
     exec printf(template, n, n, n)
 endfunction
-exec Public('s:SetTabWidth')
+
+function! s:RefreshFileType(filetype)
+    let n = a:filetype
+    let template = "set filetype=%s\n"
+    exec printf(template, n)
+endfunction
+
+function! s:Random()
+    return system('echo -n ${RANDOM}')
+endfunction
+
+exec Public('s:SetTabWidth',
+    \'s:GetSelectOnALine',
+    \'s:RefreshFileType',
+    \'s:Random')

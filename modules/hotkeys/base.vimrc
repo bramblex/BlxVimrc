@@ -16,6 +16,7 @@ nnoremap <leader>w :w<cr>
 nnoremap <C-n> :MBEbn<cr>
 nnoremap <C-p> :MBEbp<cr>
 nnoremap <leader>d :MBEbd<cr>
+"nnoremap <leader>d :MBEbw<cr>
 "nnoremap <C-n> :bn<CR>
 "nnoremap <C-p> :bp<CR>
 "nnoremap <leader>d :bd<CR>
@@ -65,7 +66,10 @@ nnoremap <leader>r :read!
 " R     rename the file/directory
 " D     Delete the file/directory
 " nnoremap <leader>e :call g:ToggleExplore()<cr>
-nnoremap <leader>e :NERDTreeToggle<cr>
+"nnoremap <leader>e :NERDTreeToggle<cr>
+let file = Require('file')
+nnoremap <leader>% :call file.ChooseAndOpen('')<cr>
+nnoremap <leader>e :call file.ChooseAndOpen(file.Dirname('%'))<cr>
 
 " Git相關
 nnoremap <leader>g :!git 

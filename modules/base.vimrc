@@ -1,5 +1,8 @@
-Require settings
+Require head
+
 Require bundle
 Require hotkeys/base
 Require themes
-Require indent
+Require type
+
+Require tail
