@@ -86,6 +86,7 @@ vnoremap <leader>S :s///g<left><left><left>
 
 Require hotkeys/rails
 Require hotkeys/dict
+Require hotkeys/ctrlp
 
 " End
 """"""""""""""""""""""""""""""""""""""""

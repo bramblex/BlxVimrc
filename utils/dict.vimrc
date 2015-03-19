@@ -29,7 +29,7 @@ function! s:SayBySelected()
 endfunction
 
 function! s:Say(text)
-    call system('say '.a:text.'&')
+    "call system('say '.a:text.'&')
 endfunction
 
 exec Public('s:Dict', 's:DictSelectedWord', 's:Say', 's:SayBySelected')

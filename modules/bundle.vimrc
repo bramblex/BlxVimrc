@@ -43,5 +43,8 @@ call vundle#begin()
 " sheerun/vim-polyglot
     Bundle 'sheerun/vim-polyglot'
 
+" kien/ctrlp.vim
+    Bundle 'kien/ctrlp.vim'
+
 call vundle#end()            " required
 filetype plugin indent on    " required
