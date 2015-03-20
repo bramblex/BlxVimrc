@@ -10,6 +10,14 @@
 
 let s:path = add([], fnamemodify(resolve(expand('<sfile>:p')), ':h'))
 let s:Modules = {}
+let s:force_load = 0
+
+function! s:ConfigValue(var)
+    if exists('g:' . a:var)
+        return eval('g:' . a:var)
+    endif
+    return eval('s:' . a:var)
+endfunction
 
 function! g:Path()
     return s:path
@@ -25,12 +33,14 @@ let s:pre_load_tmp = []
 function! g:Require(module)
     let module = split(a:module, ' ')[0]
 
-    if has_key(s:Modules, module)
+    if has_key(s:Modules, module) && s:ConfigValue('force_load') == 0
         return s:Modules[module]
     endif
 
-    if index(s:pre_load_tmp, module) >= 0
-        echo 'Warning! Circle Require: ' . module
+    let pre_load_index = index(s:pre_load_tmp, module)
+    if  pre_load_index >= 0 
+        let require_circle = add(s:pre_load_tmp[eval(pre_load_index):], module)
+        echo  'Warning! Circle Require: ' . join(require_circle, '->')
         return g:module_load_tmp[module]
     else
         call add(s:pre_load_tmp, module)

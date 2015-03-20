@@ -15,7 +15,7 @@ let s:config['dict_path'] = '/Users/brambles/Local/usr/bin/dict-nocolor'
 call add(Path(), s:config['base_path'] . '/modules')
 call add(Path(), s:config['base_path'] . '/utils')
 
-function s:Get(key)
+function! s:Get(key)
     return s:config[a:key]
 endfunction
 exec Public('s:Get')

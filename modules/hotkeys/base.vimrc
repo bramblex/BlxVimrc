@@ -51,14 +51,15 @@ nmap // \c<space>
 imap <C-\>/ <esc>\c<space>$a
 
 " 分屏幕同步滾動
-nnoremap <leader>b :call g:ToggleScrollBinding()<cr>
+"let utils = Require('utils')
+"nnoremap <leader>b :call utils.ToggleScrollBinding()<cr>
 
 " 插入命令的輸出
 " 例如：
 "   1.輸入date則插入時間
 "   2.輸入cal則插入日曆
 "   3.輸入ls則插入當前目錄下的文件列表
-nnoremap <leader>r :read!
+nnoremap <leader>r :silent read!
 
 " 文件管理器快捷鍵
 " %     create a new file
@@ -68,7 +69,7 @@ nnoremap <leader>r :read!
 " nnoremap <leader>e :call g:ToggleExplore()<cr>
 "nnoremap <leader>e :NERDTreeToggle<cr>
 let file = Require('file')
-nnoremap <leader>% :call file.ChooseAndOpen('')<cr>
+"nnoremap <leader>% :call file.ChooseAndOpen('')<cr>
 nnoremap <leader>e :call file.ChooseAndOpen(file.Dirname('%'))<cr>
 
 " Git相關
@@ -81,12 +82,14 @@ nnoremap <leader>gs :!git status<cr>
 "nnoremap <Leader>t :call g:RenderTemplate()<cr>
 
 "   选择替换搜索
-nnoremap <leader>S :%s///g<left><left><left>
-vnoremap <leader>S :s///g<left><left><left>
+"nnoremap <leader>S :%s///g<left><left><left>
+"vnoremap <leader>S :s///g<left><left><left>
 
 Require hotkeys/rails
 Require hotkeys/dict
 Require hotkeys/ctrlp
+Require hotkeys/man
+Require hotkeys/insert 
 
 " End
 """"""""""""""""""""""""""""""""""""""""

@@ -3,6 +3,10 @@ exec Info('auth', 'brambles')
 exec Info('email', 'qjnight@gmail.com')
 exec Info('version', 'v0.1')
 
+function! s:CmdExists(cmd)
+    return !system('type aaa > /dev/null 2>&1; echo -n $?')
+endfunction
+
 function! s:Args(arguments_list, options)
     let models = items(options)
 endfunction
@@ -35,4 +39,6 @@ endfunction
 exec Public('s:SetTabWidth',
     \'s:GetSelectOnALine',
     \'s:RefreshFileType',
-    \'s:Random')
+    \'s:Random',
+    \'s:CmdExists',
+    \)
