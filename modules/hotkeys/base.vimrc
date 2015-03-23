@@ -70,7 +70,7 @@ nnoremap <leader>r :silent read!
 "nnoremap <leader>e :NERDTreeToggle<cr>
 let file = Require('file')
 "nnoremap <leader>% :call file.ChooseAndOpen('')<cr>
-nnoremap <leader>e :call file.ChooseAndOpen(file.Dirname('%'))<cr>
+nnoremap <leader>e :call file.ChooseAndEdit(file.Dirname('%'))<cr>
 
 " Git相關
 nnoremap <leader>g :!git 

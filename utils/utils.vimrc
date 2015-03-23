@@ -7,6 +7,10 @@ function! s:CmdExists(cmd)
     return !system('type aaa > /dev/null 2>&1; echo -n $?')
 endfunction
 
+function! s:Test(opt, arg)
+    return !system('test %s %s; echo -n $?')
+endfunction
+
 function! s:Args(arguments_list, options)
     let models = items(options)
 endfunction
@@ -41,4 +45,5 @@ exec Public('s:SetTabWidth',
     \'s:RefreshFileType',
     \'s:Random',
     \'s:CmdExists',
+    \'s:Test',
     \)

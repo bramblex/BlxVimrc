@@ -11,9 +11,11 @@ let s:config['base_path'] = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 " Path for Dict
 let s:config['dict_path'] = '/Users/brambles/Local/usr/bin/dict-nocolor'
 
-" Path To Path
+" Add Path
 call add(Path(), s:config['base_path'] . '/modules')
 call add(Path(), s:config['base_path'] . '/utils')
+" test
+call add(Path(), s:config['base_path'] . '/test')
 
 function! s:Get(key)
     return s:config[a:key]

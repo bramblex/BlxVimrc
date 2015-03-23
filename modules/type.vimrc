@@ -1,5 +1,6 @@
 
 let utils = Require('utils') 
+let file = Require('file')
 
 " Default
 au BufEnter * :call utils.RefreshFileType(&filetype)
@@ -10,3 +11,6 @@ au FileType ruby,eruby :call utils.SetTabWidth(2)
 
 " html or js
 au FileType javascript,html :call utils.SetTabWidth(2)
+
+" netrw
+"au BufEnter * :call file.RangerInsteadNertw()
