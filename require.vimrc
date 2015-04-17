@@ -139,3 +139,9 @@ endfunction
 " init
 call s:ModulePathPush(resolve(expand('<sfile>:p')))
 PathAppend ./
+
+" Vim
+" vim: set filetype=vim
+"
+" Emacs
+" -*- mode: vim; -*-
