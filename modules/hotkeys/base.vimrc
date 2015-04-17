@@ -68,9 +68,9 @@ nnoremap <leader>r :silent read!
 " D     Delete the file/directory
 " nnoremap <leader>e :call g:ToggleExplore()<cr>
 "nnoremap <leader>e :NERDTreeToggle<cr>
-let file = Require('file')
-"nnoremap <leader>% :call file.ChooseAndOpen('')<cr>
-nnoremap <leader>e :call file.ChooseAndEdit(file.Dirname('%'))<cr>
+"let file = Require('file')
+nnoremap <leader>% :call utils.file.ChooseAndOpen('')<cr>
+nnoremap <leader>e :call utils.file.ChooseAndEdit(utils.file.Dirname('%'))<cr>
 
 " Git相關
 nnoremap <leader>g :!git 

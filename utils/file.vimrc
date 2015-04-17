@@ -37,17 +37,10 @@ function! s:ChooseAndEdit(dir_path)
     endif
 endfunction
 
-function! s:IsDir(path)
-    let a_path = s:AbsolutePath(a:path)
-    return utils.Test('-d', a_path)
-endfunction
-
-exec Export(
-            \'s:CurrentFile',
-            \'s:MakeTempFile',
-            \'s:ChooseAndEdit',
-            \'s:ChooseFile',
-            \'s:AbsolutePath',
-            \'s:Dirname',
-            \'s:IsDir',
-            \)
+call Exports
+            \('CurrentFile',function('s:CurrentFile'))
+            \('MakeTempFile', function('s:MakeTempFile'))
+            \('ChooseAndEdit', function('s:ChooseAndEdit'))
+            \('ChooseFile', function('s:ChooseFile'))
+            \('AbsolutePath', function('s:AbsolutePath'))
+            \('Dirname', function('s:Dirname'))

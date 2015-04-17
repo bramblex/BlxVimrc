@@ -36,10 +36,9 @@ function! s:Random()
     return system('echo -n ${RANDOM}')
 endfunction
 
-exec Export('s:SetTabWidth',
-    \'s:GetSelectOnALine',
-    \'s:RefreshFileType',
-    \'s:Random',
-    \'s:CmdExists',
-    \'s:Test',
-    \)
+call Exports('SetTabWidth', function('s:SetTabWidth'))
+    \('GetSelectOnALine', function('s:GetSelectOnALine'))
+    \('RefreshFileType', function('s:RefreshFileType'))
+    \('Random', function('s:Random'))
+    \('CmdExists', function('s:CmdExists'))
+    \('Test', function('s:Test'))

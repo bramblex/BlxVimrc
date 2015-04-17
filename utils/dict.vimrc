@@ -25,4 +25,7 @@ function! s:Say(text)
     call system('say '.a:text.'&')
 endfunction
 
-exec Export('s:Dict', 's:DictSelectedWord', 's:Say', 's:SayBySelected')
+call Exports('Dict',function('s:Dict'))
+            \('DictSelectedWord',function('s:DictSelectedWord'))
+            \('Say',function('s:Say'))
+            \('SayBySelected',function('s:SayBySelected'))

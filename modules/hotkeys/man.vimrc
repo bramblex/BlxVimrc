@@ -1,7 +1,5 @@
 
-let man = Require('utils/man') 
-
-command! -nargs=1 Man call man.Man(<f-args>)
+command! -nargs=1 Man call utils.man.Man(<f-args>)
 nnoremap <leader>m :Man 
 
-vnoremap <leader>m :call man.ManBySelected()<cr>
+vnoremap <leader>m :call utils.man.ManBySelected()<cr>

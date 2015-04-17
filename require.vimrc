@@ -54,6 +54,43 @@ command! -nargs=1 PathAppend call g:PathAppend(<f-args>)
 let g:__module_tmp__ = {}
 let s:preload_list = []
 
+function! s:LoadModule(module_path)
+    let preload_index = index(s:preload_list, a:module_path)
+    if  preload_index >= 0
+        let require_circle = add(s:preload_list[eval(preload_index):], a:module_path)
+        echo g:__CurrentMmodulePath__() . ':'
+        echo  'Warning! Circle Require: ' . join(require_circle, ' -> ')
+        return g:__module_tmp__[a:module_path]
+    else
+        call add(s:preload_list, a:module_path)
+    endif
+
+    if !has_key(g:__module_tmp__, a:module_path)
+        let g:__module_tmp__[a:module_path] = {}
+        let g:__module_tmp__[a:module_path]['__module__'] = a:module_path
+        call s:ModulePathPush(a:module_path)
+        exec 'source ' . a:module_path
+        call s:ModulePathPop()
+        let s:modules[a:module_path] = remove(g:__module_tmp__, a:module_path)
+        call add(s:preload_list, a:module_path)
+
+        call remove(s:preload_list, a:module_path)
+        return s:modules[a:module_path]
+    endif
+
+    call remove(s:preload_list, a:module_path)
+endfunction
+
+function! s:LoadPackage(package_path)
+    let package_base = resolve(a:package_path . '/base.vimrc' )
+    if filereadable(package_base)
+        return s:LoadModule(package_base)
+    else
+        echo g:__CurrentMmodulePath__() . ':'
+        echo 'Cannot Load Package Base File: ' . package_base
+    end
+endfunction
+
 function! Require(module_name)
 
     let module_name = substitute(a:module_name, '^\s*\(.\{-}\)\s*$', '\1', '')
@@ -68,37 +105,20 @@ function! Require(module_name)
 
         " @TODO to 
         let module_path = resolve(path . '/' . module_name . '.vimrc')
+        let package_path = resolve(path . '/' . module_name)
 
         if has_key(s:modules, module_path)
             return s:modules[module_path]
         endif
 
+        if isdirectory(package_path)
+            return s:LoadPackage(package_path)
+        end
+
         if filereadable(module_path)
-
-            let preload_index = index(s:preload_list, module_path)
-            if  preload_index >= 0
-                let require_circle = add(s:preload_list[eval(preload_index):], module_path)
-                echo g:__CurrentMmodulePath__() . ':'
-                echo  'Warning! Circle Require: ' . join(require_circle, ' -> ')
-                return g:__module_tmp__[module_path]
-            else
-                call add(s:preload_list, module_path)
-            endif
-
-            if !has_key(g:__module_tmp__, module_path)
-                let g:__module_tmp__[module_path] = {}
-                call s:ModulePathPush(module_path)
-                exec 'source ' . module_path
-                call s:ModulePathPop()
-                let s:modules[module_path] = remove(g:__module_tmp__, module_path)
-                call add(s:preload_list, module_path)
-
-                call remove(s:preload_list, module_path)
-                return s:modules[module_path]
-            endif
-
-            call remove(s:preload_list, module_path)
+            return s:LoadModule(module_path)
         endif
+
     endfor
 
         echo g:__CurrentMmodulePath__() . ':'
@@ -107,15 +127,11 @@ function! Require(module_name)
 endfunction
 command! -nargs=1 Require call g:Require(<f-args>)
 
-function! Export(...)
-    let template = 
-                \"let g:__module_tmp__[g:__CurrentMmodulePath__()]['%s'] = function('%s')"
-    let result_list = []
-    for func in a:000
-        call add(result_list, printf(template, split(func, ':')[-1], func))
-    endfor
-    return join(result_list, "\n")
+function! Exports(key, value)
+    let g:__module_tmp__[g:__CurrentMmodulePath__()][a:key] = a:value
+    return function('Exports')
 endfunction
 
+" init
 call s:ModulePathPush(resolve(expand('<sfile>:p')))
 PathAppend ./

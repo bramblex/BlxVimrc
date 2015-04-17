@@ -11,4 +11,5 @@ exec 'source ' . s:base_path . '/require.vimrc'
 
 let config = Require('config')
 let utils = Require('utils')
-Require base
+
+Require modules

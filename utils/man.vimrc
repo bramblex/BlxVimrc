@@ -1,12 +1,14 @@
 
+let s:utils = Require('utils')
 function! s:Man(word)
     silent exec '!man ' . a:word
     redraw!
 endfunction
 
 function! s:ManBySelected()
-    let word = utils.GetSelectOnALine()
+    let word = s:utils.GetSelectOnALine()
     call s:Man(word)
 endfunction
 
-exec Export('s:Man', 's:ManBySelected')
+call Exports('Man', function('s:Man'))
+            \('ManBySelected', function('s:ManBySelected'))
