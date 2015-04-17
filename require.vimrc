@@ -29,20 +29,24 @@ function! g:__CurrentMmoduleDir__()
     return resolve(fnamemodify(s:current_module_stack[-1], ':h'))
 endfunction
 
-function! PathAppend(path)
+function! g:PathAppend(path)
     let path = substitute(a:path, '^\s*\(.\{-}\)\s*$', '\1', '')
 
     if path =~ '^\/.*'
         let path = path
     elseif path =~ '^\~\/.*'
-        let path = resolve($HOME . path[2:])
+        let path = resolve($HOME . '/' . path[2:])
     else
         let path = resolve(g:__CurrentMmoduleDir__() . '/' . path)
     end
 
-    if !isdirectory(path)
+    if !isdirectory(path) 
         echo g:__CurrentMmodulePath__() . ':'
         echo 'Path Error: '. paths .' is not a directory!'
+        return s:paths
+    end
+
+    if len(s:paths) > 0 && index(s:paths, path) < 0
         return s:paths
     end
 
@@ -91,7 +95,7 @@ function! s:LoadPackage(package_path)
     end
 endfunction
 
-function! Require(module_name)
+function! g:Require(module_name)
 
     let module_name = substitute(a:module_name, '^\s*\(.\{-}\)\s*$', '\1', '')
 
@@ -127,9 +131,9 @@ function! Require(module_name)
 endfunction
 command! -nargs=1 Require call g:Require(<f-args>)
 
-function! Exports(key, value)
+function! g:Exports(key, value)
     let g:__module_tmp__[g:__CurrentMmodulePath__()][a:key] = a:value
-    return function('Exports')
+    return function('g:Exports')
 endfunction
 
 " init
