@@ -7,7 +7,7 @@
 BlxVimrc是本人使用的VIM编辑器配置。Vimrc建立在一套完善的模块系统require.vimrc上，比起网络上大多数VIM配置文件说更易于理解、管理以及扩展。目前我还没找到像我这样把VIM配置文件都写成工程的奇葩。
 
 ###require.vimrc 简介：
-require.vimrc 是用纯粹的Vimscript在Vimscript中模拟了一套类似nodejs中的模块系统，支持模块(Module)和包(Packge)的概念，支持递归依赖，支持循环依赖(循环依赖会给出Warring，可以添加silent前缀忽略掉。毕竟循环依赖是不健康的……)等特性。动态加载，你可以选择你需要的时候加载。拥有模块缓存，同一个模块在VIM中只会被加载一次。
+require.vimrc 是用纯粹的Vimscript在Vimscript中模拟了一套类似nodejs中的模块系统，支持模块(Module)和包(Packge)的概念，支持递归依赖，支持循环依赖(循环依赖会给出Warning，可以添加silent前缀忽略掉。毕竟循环依赖是不健康的……)等特性。动态加载，你可以选择你需要的时候加载。拥有模块缓存，同一个模块在VIM中只会被加载一次。
 
 
 ##安装使用：
