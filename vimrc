@@ -10,4 +10,5 @@ let s:base_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 exec 'source ' . s:base_path . '/require.vimrc' 
 
 let config = Require('config')
+let utils = Require('utils')
 Require base

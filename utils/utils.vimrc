@@ -1,8 +1,4 @@
 
-exec Info('auth', 'brambles')
-exec Info('email', 'qjnight@gmail.com')
-exec Info('version', 'v0.1')
-
 function! s:CmdExists(cmd)
     return !system('type aaa > /dev/null 2>&1; echo -n $?')
 endfunction
@@ -40,7 +36,7 @@ function! s:Random()
     return system('echo -n ${RANDOM}')
 endfunction
 
-exec Public('s:SetTabWidth',
+exec Export('s:SetTabWidth',
     \'s:GetSelectOnALine',
     \'s:RefreshFileType',
     \'s:Random',

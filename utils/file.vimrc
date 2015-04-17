@@ -1,10 +1,4 @@
 
-exec Info('auth', 'brambles')
-exec Info('email', 'qjnight@gmail.com')
-exec Info('version', 'v0.1')
-exec Info('name', 'File')
-
-let s:utils = Require('utils')
 function! s:AbsolutePath(path)
     return fnamemodify(resolve(expand(a:path)), ':p')
 endfunction
@@ -45,10 +39,10 @@ endfunction
 
 function! s:IsDir(path)
     let a_path = s:AbsolutePath(a:path)
-    return s:utils.Test('-d', a_path)
+    return utils.Test('-d', a_path)
 endfunction
 
-exec Public(
+exec Export(
             \'s:CurrentFile',
             \'s:MakeTempFile',
             \'s:ChooseAndEdit',

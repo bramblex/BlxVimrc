@@ -12,3 +12,6 @@ nnoremap <leader><leader>rdm :!rake  db:migrate
 
 nnoremap <leader><leader>rt :!rspec 
 nnoremap <leader><leader>rt :exec '!rspec ' . file.CurrentFile()
+
+imap <c-\>= <%= %><left><left><left> 
+imap <c-\>% <% %><left><left><left> 

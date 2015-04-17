@@ -34,9 +34,6 @@ call vundle#begin()
 " MiniBufexpl.vim
     Bundle 'fholgado/minibufexpl.vim'
 
-" NredTree
-    "Bundle 'scrooloose/nerdtree'
-
 " mileszs/ack.vim
     Bundle 'mileszs/ack.vim'
 
@@ -45,6 +42,12 @@ call vundle#begin()
 
 " kien/ctrlp.vim
     Bundle 'kien/ctrlp.vim'
+
+" jpalardy/vim-slime
+    "Bundle 'jpalardy/vim-slime'
+    "let g:slime_target = 'tmux'
+    Bundle 'conque'
+
 
 call vundle#end()            " required
 filetype plugin indent on    " required

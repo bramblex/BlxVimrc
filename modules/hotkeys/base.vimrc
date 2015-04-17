@@ -82,14 +82,15 @@ nnoremap <leader>gs :!git status<cr>
 "nnoremap <Leader>t :call g:RenderTemplate()<cr>
 
 "   选择替换搜索
-"nnoremap <leader>S :%s///g<left><left><left>
-"vnoremap <leader>S :s///g<left><left><left>
+nnoremap <leader>S :%s///g<left><left><left>
+vnoremap <leader>S :s///g<left><left><left>
 
-Require hotkeys/rails
-Require hotkeys/dict
-Require hotkeys/ctrlp
-Require hotkeys/man
-Require hotkeys/insert 
+Require rails
+Require dict
+Require ctrlp
+Require man
+Require insert 
+Require conque
 
 " End
 """"""""""""""""""""""""""""""""""""""""

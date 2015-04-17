@@ -1,5 +1,5 @@
 
-let dict = Require('dict') 
+let dict = Require('utils/dict') 
 
 command! -nargs=1 Dict call dict.Dict(<f-args>)
 nnoremap <leader>t :Dict 
