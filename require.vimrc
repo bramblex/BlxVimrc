@@ -143,6 +143,11 @@ function! g:Exports(key, value)
     return function('g:Exports')
 endfunction
 
+function! g:Module(value)
+    let g:__module_tmp__[g:__CurrentMmodulePath__()] = a:value
+    return function('g:Exports')
+endfunction
+
 " Append base path
 if !exists('g:require_base_file')
     let g:require_base_file = resolve(expand('<sfile>:p'))

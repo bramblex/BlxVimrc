@@ -10,4 +10,5 @@ function! s:Get(key)
     return s:config[a:key]
 endfunction
 
-call Exports('Get', function('s:Get'))
+call Module(s:config)
+            \('Get', function('s:Get'))
