@@ -40,7 +40,7 @@ function g:__CurrentMmodulePath__()
 endfunction
 
 function g:__CurrentMmoduleDir__()
-    return resolve(fnamemodify(s:current_module_stack[-1], ':h'))
+    return fnamemodify(s:current_module_stack[-1], ':h')
 endfunction
 
 function g:PathAppend(path)
@@ -49,9 +49,9 @@ function g:PathAppend(path)
     if path =~ '^\/.*'
         let path = path
     elseif path =~ '^\~\/.*'
-        let path = resolve($HOME . '/' . path[2:])
+        let path = simplify($HOME . '/' . path[2:])
     else
-        let path = resolve(g:__CurrentMmoduleDir__() . '/' . path)
+        let path = simplify(g:__CurrentMmoduleDir__() . '/' . path)
     end
 
     if !isdirectory(path) 
@@ -98,7 +98,7 @@ function s:LoadModule(module_path)
 endfunction
 
 function s:LoadPackage(package_path)
-    let package_base = resolve(a:package_path . '/base.vimrc' )
+    let package_base = simplify(a:package_path . '/base.vimrc' )
     if filereadable(package_base)
         return s:LoadModule(package_base)
     else
@@ -127,7 +127,7 @@ function g:Require(module_name)
 
     let module_name = substitute(a:module_name, '^\s*\(.\{-}\)\s*$', '\1', '')
 
-    if module_name !~ '^[_a-zA-Z][_a-zA-z\/\.]*$'
+    if module_name !~ '^[_a-zA-z\/\.]*$'
         call s:Log('error', 'Module name error' . )
         return 0
     endif
@@ -137,10 +137,20 @@ function g:Require(module_name)
         return cache_module
     endif
 
-    for path in insert(copy(s:paths), g:__CurrentMmoduleDir__())
+    let c_d = g:__CurrentMmoduleDir__()
+    if module_name =~ '^\.\.\/' || module_name =~ '^\.\/'
+        let paths = [c_d]
+    elseif module_name =~ '^\/'
+        let paths = [fnamemodify(module_name, ':h')]
+        let module_name = fnamemodify(module_name, ':t')
+    else
+        let paths = insert(copy(s:paths), c_d)
+    endif
 
-        let module_path = resolve(path . '/' . module_name . '.vimrc')
-        let package_path = resolve(path . '/' . module_name)
+    for path in paths
+
+        let module_path = simplify(path . '/' . module_name . '.vimrc')
+        let package_path = simplify(path . '/' . module_name)
 
         if has_key(s:modules, module_path)
             return s:Cache(module_name, s:modules[module_path])
