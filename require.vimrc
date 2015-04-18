@@ -9,40 +9,41 @@
 
 let s:paths = []
 let s:modules = {}
+let s:caches = {}
 
 let s:current_module_stack = []
 
-function! s:Log(type, message)
+function s:Log(type, message)
     echo g:__CurrentMmodulePath__() . ':'
     if a:type == 'warning'
         echohl WarningMsg | echo 'WARNING: ' . a:message | echohl None
     elseif a:type == 'error'
         echohl ErrorMsg | echo 'ERROR: ' . a:message | echohl None
-    elseif a:type == 'info'
+    elseif a:type == 'debug'
         echohl Normal | echo 'DEBUG: ' . a:message | echohl None
     else
         throw 'Unkow Log Type'
     endif
 endfunction
 
-function! s:ModulePathPush(path)
+function s:ModulePathPush(path)
     call add(s:current_module_stack, a:path)
     return a:path
 endfunction
 
-function! s:ModulePathPop()
+function s:ModulePathPop()
     return remove(s:current_module_stack, -1)
 endfunction
 
-function! g:__CurrentMmodulePath__()
+function g:__CurrentMmodulePath__()
     return s:current_module_stack[-1]
 endfunction
 
-function! g:__CurrentMmoduleDir__()
+function g:__CurrentMmoduleDir__()
     return resolve(fnamemodify(s:current_module_stack[-1], ':h'))
 endfunction
 
-function! g:PathAppend(path)
+function g:PathAppend(path)
     let path = substitute(a:path, '^\s*\(.\{-}\)\s*$', '\1', '')
 
     if path =~ '^\/.*'
@@ -65,12 +66,12 @@ function! g:PathAppend(path)
     call insert(s:paths, path)
     return s:paths
 endfunction
-command! -nargs=1 PathAppend call g:PathAppend(<f-args>)
+command -nargs=1 PathAppend call g:PathAppend(<f-args>)
 
 let g:__module_tmp__ = {}
 let s:preload_list = []
 
-function! s:LoadModule(module_path)
+function s:LoadModule(module_path)
     let preload_index = index(s:preload_list, a:module_path)
     if  preload_index >= 0
         let require_circle = add(s:preload_list[eval(preload_index):], a:module_path)
@@ -96,7 +97,7 @@ function! s:LoadModule(module_path)
     call remove(s:preload_list, a:module_path)
 endfunction
 
-function! s:LoadPackage(package_path)
+function s:LoadPackage(package_path)
     let package_base = resolve(a:package_path . '/base.vimrc' )
     if filereadable(package_base)
         return s:LoadModule(package_base)
@@ -105,13 +106,35 @@ function! s:LoadPackage(package_path)
     end
 endfunction
 
-function! g:Require(module_name)
+function s:Cache(module_name, module)
+    let c_d = g:__CurrentMmoduleDir__()
+    if !has_key(s:caches, c_d)
+        let s:caches[c_d] = {}
+    end
+    let s:caches[c_d][a:module_name] = a:module
+    return a:module
+endfunction
+
+function s:SearchCache(module_name)
+    let c_d = g:__CurrentMmoduleDir__()
+    if has_key(s:caches, c_d) && has_key(s:caches[c_d], a:module_name)
+        return s:caches[c_d][a:module_name]
+    end
+    return 0
+endfunction
+
+function g:Require(module_name)
 
     let module_name = substitute(a:module_name, '^\s*\(.\{-}\)\s*$', '\1', '')
 
     if module_name !~ '^[_a-zA-Z][_a-zA-z\/\.]*$'
-        call s:Log('error', 'Model name error' . )
+        call s:Log('error', 'Module name error' . )
         return 0
+    endif
+
+    let cache_module = s:SearchCache(module_name)
+    if !empty(cache_module)
+        return cache_module
     endif
 
     for path in insert(copy(s:paths), g:__CurrentMmoduleDir__())
@@ -120,15 +143,15 @@ function! g:Require(module_name)
         let package_path = resolve(path . '/' . module_name)
 
         if has_key(s:modules, module_path)
-            return s:modules[module_path]
+            return s:Cache(module_name, s:modules[module_path])
         endif
 
         if isdirectory(package_path)
-            return s:LoadPackage(package_path)
+            return s:Cache(module_name, s:LoadPackage(package_path))
         end
 
         if filereadable(module_path)
-            return s:LoadModule(module_path)
+            return s:Cache(module_name, s:LoadModule(module_path))
         endif
 
     endfor
@@ -136,14 +159,14 @@ function! g:Require(module_name)
     call s:Log('error', 'Can not find module ' . module_name)
     return 0
 endfunction
-command! -nargs=1 Require call g:Require(<f-args>)
+command -nargs=1 Require call g:Require(<f-args>)
 
-function! g:Exports(key, value)
+function g:Exports(key, value)
     let g:__module_tmp__[g:__CurrentMmodulePath__()][a:key] = a:value
     return function('g:Exports')
 endfunction
 
-function! g:Module(value)
+function g:Module(value)
     let g:__module_tmp__[g:__CurrentMmodulePath__()] = a:value
     return function('g:Exports')
 endfunction
