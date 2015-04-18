@@ -1,9 +1,8 @@
 
 let s:utils = Require('utils')
-let s:config = Require('config')
 
 function! s:Dict(word)
-    let dict_path = s:config.Get('dict_path')
+    let dict_path = g:config.Get('dict_path')
     let result = system(printf('%s %s', dict_path, a:word))
     " 使用quickfix窗口显示内容
     cexpr result

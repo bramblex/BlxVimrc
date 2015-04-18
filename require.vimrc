@@ -12,6 +12,19 @@ let s:modules = {}
 
 let s:current_module_stack = []
 
+function! s:Log(type, message)
+    echo g:__CurrentMmodulePath__() . ':'
+    if a:type == 'warning'
+        echohl WarningMsg | echo 'WARNING: ' . a:message | echohl None
+    elseif a:type == 'error'
+        echohl ErrorMsg | echo 'ERROR: ' . a:message | echohl None
+    elseif a:type == 'info'
+        echohl Normal | echo 'DEBUG: ' . a:message | echohl None
+    else
+        throw 'Unkow Log Type'
+    endif
+endfunction
+
 function! s:ModulePathPush(path)
     call add(s:current_module_stack, a:path)
     return a:path
@@ -41,8 +54,7 @@ function! g:PathAppend(path)
     end
 
     if !isdirectory(path) 
-        echo g:__CurrentMmodulePath__() . ':'
-        echo 'Path Error: '. paths .' is not a directory!'
+        call s:Log('error', path .' is not a directory!')
         return s:paths
     end
 
@@ -62,8 +74,7 @@ function! s:LoadModule(module_path)
     let preload_index = index(s:preload_list, a:module_path)
     if  preload_index >= 0
         let require_circle = add(s:preload_list[eval(preload_index):], a:module_path)
-        echo g:__CurrentMmodulePath__() . ':'
-        echo  'Warning! Circle Require: ' . join(require_circle, ' -> ')
+        call s:Log('warning', 'Circle Require ' . join(require_circle, ' -> '))
         return g:__module_tmp__[a:module_path]
     else
         call add(s:preload_list, a:module_path)
@@ -90,8 +101,7 @@ function! s:LoadPackage(package_path)
     if filereadable(package_base)
         return s:LoadModule(package_base)
     else
-        echo g:__CurrentMmodulePath__() . ':'
-        echo 'Cannot Load Package Base File: ' . package_base
+        call s:Log('error', 'Cannot load package base file ' . package_base)
     end
 endfunction
 
@@ -100,14 +110,12 @@ function! g:Require(module_name)
     let module_name = substitute(a:module_name, '^\s*\(.\{-}\)\s*$', '\1', '')
 
     if module_name !~ '^[_a-zA-Z][_a-zA-z\/\.]*$'
-        echo g:__CurrentMmodulePath__() . ':'
-        echo 'Error module name: ' . module_name
+        call s:Log('error', 'Model name error' . )
         return 0
     endif
 
     for path in insert(copy(s:paths), g:__CurrentMmoduleDir__())
 
-        " @TODO to 
         let module_path = resolve(path . '/' . module_name . '.vimrc')
         let package_path = resolve(path . '/' . module_name)
 
@@ -125,8 +133,7 @@ function! g:Require(module_name)
 
     endfor
 
-        echo g:__CurrentMmodulePath__() . ':'
-    echo 'Can not find module: ' . module_name
+    call s:Log('error', 'Can not find module ' . module_name)
     return 0
 endfunction
 command! -nargs=1 Require call g:Require(<f-args>)
@@ -136,9 +143,14 @@ function! g:Exports(key, value)
     return function('g:Exports')
 endfunction
 
-" init
-call s:ModulePathPush(resolve(expand('<sfile>:p')))
-PathAppend ./
+" Append base path
+if !exists('g:require_base_file')
+    let g:require_base_file = resolve(expand('<sfile>:p'))
+end
+call s:ModulePathPush(g:require_base_file)
+
+" Set file type to vim
+autocmd BufRead *.vimrc set filetype=vim
 
 " Vim
 " vim: set filetype=vim

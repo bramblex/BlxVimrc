@@ -4,12 +4,12 @@
 " auth:     brambles
 " email:    qjnight@gmail.com
 " date:     2015-2-18
-"
 
-let base_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
-exec 'source ' . resolve(base_path . '/require.vimrc')
 
-let config = Require('config')
-let utils = Require('utils')
+let g:require_base_file = resolve(expand('<sfile>:p'))
+exec 'source ' . resolve(fnamemodify(g:require_base_file, ':h'). '/require.vimrc')
+
+let g:config = Require('config')
+let g:utils = Require('utils')
 
 Require modules
