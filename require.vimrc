@@ -82,10 +82,10 @@ function! s:LoadModule(module_path)
 
     if !has_key(g:__module_tmp__, a:module_path)
         let g:__module_tmp__[a:module_path] = {}
-        let g:__module_tmp__[a:module_path]['__module__'] = a:module_path
         call s:ModulePathPush(a:module_path)
         exec 'source ' . a:module_path
         call s:ModulePathPop()
+        let g:__module_tmp__[a:module_path]['__module__'] = a:module_path
         let s:modules[a:module_path] = remove(g:__module_tmp__, a:module_path)
         call add(s:preload_list, a:module_path)
 
