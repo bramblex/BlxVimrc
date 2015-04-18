@@ -11,12 +11,8 @@ function! s:CurrentFile()
     return s:AbsolutePath('%')
 endfunction
 
-function! s:MakeTempFile()
-    return substitute(system('mktemp -u -t BlxVimrc'), '\n', '', '')
-endfunction
-
 function! s:ChooseFile(dir_path)
-    let tmp_file = s:MakeTempFile()
+    let tmp_file = tempname()
     let location = s:AbsolutePath(a:dir_path)
 
     silent exec join(['!ranger', location, '--choosefile=' . tmp_file], ' ')
@@ -39,7 +35,6 @@ endfunction
 
 call Exports
             \('CurrentFile',function('s:CurrentFile'))
-            \('MakeTempFile', function('s:MakeTempFile'))
             \('ChooseAndEdit', function('s:ChooseAndEdit'))
             \('ChooseFile', function('s:ChooseFile'))
             \('AbsolutePath', function('s:AbsolutePath'))
