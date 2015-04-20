@@ -1,10 +1,10 @@
 
 function! s:AbsolutePath(path)
-    return fnamemodify(resolve(expand(a:path)), ':p')
+    return fnamemodify(expand(a:path), ':p')
 endfunction
 
 function! s:Dirname(path)
-    return fnamemodify(resolve(expand(a:path)), ':p:h')
+    return fnamemodify(expand(a:path), ':p:h')
 endfunction
 
 function! s:CurrentFile()

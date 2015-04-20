@@ -66,4 +66,3 @@
 
     set clipboard+=unnamed " 共享剪贴板
 
-    Require hotkeys/ctrlp

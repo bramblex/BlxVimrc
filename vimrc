@@ -12,4 +12,4 @@ exec 'source ' . resolve(fnamemodify(g:require_base_file, ':h'). '/require.vimrc
 let g:config = Require('config')
 let g:utils = Require('utils')
 
-Require modules
+call Require('modules')

@@ -85,12 +85,12 @@ nnoremap <leader>gs :!git status<cr>
 nnoremap <leader>S :%s///g<left><left><left>
 vnoremap <leader>S :s///g<left><left><left>
 
-Require rails
-Require dict
-Require ctrlp
-Require man
-Require insert 
-Require conque
+call Require('rails')
+call Require('dict')
+call Require('ctrlp')
+call Require('man')
+call Require('insert')
+call Require('conque')
 
 " End
 """"""""""""""""""""""""""""""""""""""""

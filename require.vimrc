@@ -66,7 +66,6 @@ function g:PathAppend(path)
     call insert(s:paths, path)
     return s:paths
 endfunction
-command -nargs=1 PathAppend call g:PathAppend(<f-args>)
 
 let g:__module_tmp__ = {}
 let s:preload_list = []
@@ -169,7 +168,6 @@ function g:Require(module_name)
     call s:Log('error', 'Can not find module ' . module_name)
     return 0
 endfunction
-command -nargs=1 Require call g:Require(<f-args>)
 
 function g:Exports(key, value)
     let g:__module_tmp__[g:__CurrentMmodulePath__()][a:key] = a:value

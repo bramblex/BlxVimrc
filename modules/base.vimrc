@@ -1,8 +1,8 @@
-Require head
+call Require('head') 
 
-Require bundle
-Require hotkeys/base
-Require themes
-Require type
+call Require('bundle') 
+call Require('hotkeys') 
+call Require('themes') 
+call Require('type') 
 
-Require tail
+call Require('tail') 
