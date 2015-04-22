@@ -43,7 +43,7 @@ function g:__CurrentMmoduleDir__()
     return fnamemodify(s:current_module_stack[-1], ':h')
 endfunction
 
-function g:PathAppend(path)
+function PathAppend(path)
     let path = substitute(a:path, '^\s*\(.\{-}\)\s*$', '\1', '')
 
     if path =~ '^\/.*'
@@ -56,15 +56,15 @@ function g:PathAppend(path)
 
     if !isdirectory(path) 
         call s:Log('error', path .' is not a directory!')
-        return s:paths
+        return function('g:PathAppend')
     end
 
     if len(s:paths) > 0 && index(s:paths, path) < 0
-        return s:paths
+        return function('g:PathAppend')
     end
 
     call insert(s:paths, path)
-    return s:paths
+        return function('g:PathAppend')
 endfunction
 
 let g:__module_tmp__ = {}
@@ -122,7 +122,7 @@ function s:SearchCache(module_name)
     return 0
 endfunction
 
-function g:Require(module_name)
+function Require(module_name)
 
     let module_name = substitute(a:module_name, '^\s*\(.\{-}\)\s*$', '\1', '')
 
@@ -169,21 +169,21 @@ function g:Require(module_name)
     return 0
 endfunction
 
-function g:Exports(key, value)
+function Exports(key, value)
     let g:__module_tmp__[g:__CurrentMmodulePath__()][a:key] = a:value
     return function('g:Exports')
 endfunction
 
-function g:Module(value)
+function Module(value)
     let g:__module_tmp__[g:__CurrentMmodulePath__()] = a:value
     return function('g:Exports')
 endfunction
 
-" Append base path
-if !exists('g:require_base_file')
-    let g:require_base_file = resolve(expand('<sfile>:p'))
+" Append base module
+if !exists('g:require_base_module')
+    let g:require_base_module = resolve(expand('<sfile>:p'))
 end
-call s:ModulePathPush(g:require_base_file)
+call s:ModulePathPush(g:require_base_module)
 
 " Set file type to vim
 autocmd BufRead *.vimrc set filetype=vim

@@ -91,6 +91,7 @@ call Require('ctrlp')
 call Require('man')
 call Require('insert')
 call Require('conque')
+"call Require('tab')
 
 " End
 """"""""""""""""""""""""""""""""""""""""
