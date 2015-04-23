@@ -56,15 +56,15 @@ function PathAppend(path)
 
     if !isdirectory(path) 
         call s:Log('error', path .' is not a directory!')
-        return function('g:PathAppend')
+        return function('PathAppend')
     end
 
     if len(s:paths) > 0 && index(s:paths, path) < 0
-        return function('g:PathAppend')
+        return function('PathAppend')
     end
 
     call insert(s:paths, path)
-        return function('g:PathAppend')
+    return function('PathAppend')
 endfunction
 
 let g:__module_tmp__ = {}
@@ -171,12 +171,12 @@ endfunction
 
 function Exports(key, value)
     let g:__module_tmp__[g:__CurrentMmodulePath__()][a:key] = a:value
-    return function('g:Exports')
+    return function('Exports')
 endfunction
 
 function Module(value)
     let g:__module_tmp__[g:__CurrentMmodulePath__()] = a:value
-    return function('g:Exports')
+    return function('Exports')
 endfunction
 
 " Append base module
