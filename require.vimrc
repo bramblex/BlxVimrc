@@ -127,7 +127,7 @@ function Require(module_name)
     let module_name = substitute(a:module_name, '^\s*\(.\{-}\)\s*$', '\1', '')
 
     if module_name !~ '^[_a-zA-z\/\.]*$'
-        call s:Log('error', 'Module name error' . )
+        call s:Log('error', 'Module name error ' . module_name)
         return 0
     endif
 
