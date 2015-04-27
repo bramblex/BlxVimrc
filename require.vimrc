@@ -186,7 +186,11 @@ end
 call s:ModulePathPush(g:require_base_module)
 
 " Set file type to vim
-autocmd BufRead *.vimrc set filetype=vim
+function g:_init_vimrc_file_type_()
+    set filetype=vim
+    syn keyword vimFuncName contained Require Exports Module PathAppend
+endfunction
+autocmd BufReadPost .vimrc,vimrc,*.vimrc,*vim call g:_init_vimrc_file_type_()
 
 " Vim
 " vim: set filetype=vim

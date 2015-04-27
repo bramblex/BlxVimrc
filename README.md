@@ -93,7 +93,7 @@ $ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ```
 
 ###模块(Module)的调用：
-可以通过 `Require module_name` 或者 `let module = Require('module_name')`来调用模块
+可以通过 `call Require('module_name')` 或者 `let module = Require('module_name')`来调用模块
 
 ```VimL
     let hello_module = Require('hello_module')
@@ -126,5 +126,4 @@ hello_module.vimrc 和之前一样不变。
     echo hello_package.hello_module.hello "=>输出 'hello world!'
     call hello_package.hello_module.SayHello() "=>输出 'hello world!'
 ```
-
 
