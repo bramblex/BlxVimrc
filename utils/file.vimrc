@@ -13,9 +13,9 @@ endfunction
 
 function! s:ChooseFile(dir_path)
     let tmp_file = tempname()
-    let location = s:AbsolutePath(a:dir_path)
+    let path = s:AbsolutePath(a:dir_path)
 
-    silent exec join(['!ranger', location, '--choosefile=' . tmp_file], ' ')
+    silent exec join(['!ranger', path, '--choosefile=' . tmp_file], ' ')
     redraw!
 
     let result = 0

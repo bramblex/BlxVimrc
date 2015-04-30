@@ -13,3 +13,6 @@ let g:config = Require('config')
 let g:utils = Require('utils')
 
 call Require('modules')
+
+" set for NeoVim
+set ttimeoutlen=0

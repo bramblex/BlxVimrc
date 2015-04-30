@@ -69,7 +69,7 @@ nnoremap <leader>r :silent read!
 " nnoremap <leader>e :call g:ToggleExplore()<cr>
 "nnoremap <leader>e :NERDTreeToggle<cr>
 "let file = Require('file')
-nnoremap <leader>% :call utils.file.ChooseAndOpen('')<cr>
+nnoremap <leader>% :call utils.file.ChooseAndEdit('')<cr>
 nnoremap <leader>e :call utils.file.ChooseAndEdit(utils.file.Dirname('%'))<cr>
 
 " Git相關

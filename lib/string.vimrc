@@ -1,4 +1,37 @@
 
+function s:Strip(string)
+    return substitute(a:string, '^\s*\(.\{-}\)\s*$', '\1', '')
+endfunction
+
+function s:ParseInt(string)
+    return str2nr(a:string)
+endfunction
+
+function s:ParseFloat(string)
+    return str2float(a:string)
+endfunction
+
+function s:Repeat(string, n)
+    return repeat(a:string, a:n)
+endfunction
+
+" @TODO mutil separators split
+function s:Split(string, separators)
+    if type(a:separators) == type('')
+        let separators = [a:separators]
+    else
+        let separators = a:separators
+    endif
+    let norm_separator = separators[0]
+
+    let tmp_string = copy(a:string)
+    for separator in separators
+        let tmp_string = substitute(tmp_string, separator, norm_separator, 'g')
+    endfor
+
+    return split(tmp_string, norm_separator)
+endfunction
+
 function s:Template(tpl, values)
     let pieces = split(a:tpl, '}}', 1)
     let result_list = []
@@ -12,10 +45,15 @@ function s:Template(tpl, values)
             return join(result_list)
         endif
 
-        let key = substitute(piece_list[1], '^\s*\(.\{-}\)\s*$', '\1', '')
+        let key = s:Strip(piece_list[1])
         call add(result_list, text . a:values[key])
     endfor
 
 endfunction
 
 call Exports('Template', function('s:Template'))
+            \('Strip', function('s:Strip'))
+            \('ParseInt', function('s:ParseInt'))
+            \('ParseFloat', function('s:ParseFloat'))
+            \('Repeat', function('s:Repeat'))
+            \('Split', function('s:Split'))
