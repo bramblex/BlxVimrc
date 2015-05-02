@@ -20,13 +20,20 @@ function s:Split(string, separators)
     if type(a:separators) == type('')
         let separators = [a:separators]
     else
-        let separators = a:separators
+        let separators = copy(a:separators)
     endif
+
+    for i in range(0, len(separators) - 1)
+        let separators[i] = escape(separators[i], '$^*+!|\/?.(){}[]')
+    endfor
+
     let norm_separator = separators[0]
 
     let tmp_string = copy(a:string)
     for separator in separators
-        let tmp_string = substitute(tmp_string, separator, norm_separator, 'g')
+        if separator != ''
+            let tmp_string = substitute(tmp_string, separator, norm_separator, 'g')
+        endif
     endfor
 
     return split(tmp_string, norm_separator)

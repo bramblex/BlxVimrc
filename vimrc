@@ -16,3 +16,5 @@ call Require('modules')
 
 " set for NeoVim
 set ttimeoutlen=0
+
+call Require('test')
