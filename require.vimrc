@@ -14,7 +14,7 @@ let s:caches = {}
 let s:current_module_stack = []
 
 function s:Log(type, message)
-    echo g:__CurrentMmodulePath__() . ':'
+    echo g:__CurrentModulePath__() . ':'
     if a:type == 'warning'
         echohl WarningMsg | echo 'WARNING: ' . a:message | echohl None
     elseif a:type == 'error'
@@ -35,12 +35,16 @@ function s:ModulePathPop()
     return remove(s:current_module_stack, -1)
 endfunction
 
-function g:__CurrentMmodulePath__()
+function g:__CurrentModulePath__()
     return s:current_module_stack[-1]
 endfunction
 
-function g:__CurrentMmoduleDir__()
-    return fnamemodify(s:current_module_stack[-1], ':h')
+function g:__CurrentModuleDir__()
+    return fnamemodify(g:__CurrentModulePath__(), ':h')
+endfunction
+
+function g:__CurrentModuleName__()
+    return join(fnamemodify(split(g:__CurrentModulePath__(), '.')[:-1], ':p'), '.')
 endfunction
 
 function PathAppend(path)
@@ -51,7 +55,7 @@ function PathAppend(path)
     elseif path =~ '^\~\/.*'
         let path = simplify($HOME . '/' . path[2:])
     else
-        let path = simplify(g:__CurrentMmoduleDir__() . '/' . path)
+        let path = simplify(g:__CurrentModuleDir__() . '/' . path)
     end
 
     if !isdirectory(path) 
@@ -106,7 +110,7 @@ function s:LoadPackage(package_path)
 endfunction
 
 function s:Cache(module_name, module)
-    let c_d = g:__CurrentMmoduleDir__()
+    let c_d = g:__CurrentModuleDir__()
     if !has_key(s:caches, c_d)
         let s:caches[c_d] = {}
     end
@@ -115,7 +119,7 @@ function s:Cache(module_name, module)
 endfunction
 
 function s:SearchCache(module_name)
-    let c_d = g:__CurrentMmoduleDir__()
+    let c_d = g:__CurrentModuleDir__()
     if has_key(s:caches, c_d) && has_key(s:caches[c_d], a:module_name)
         return s:caches[c_d][a:module_name]
     end
@@ -136,9 +140,12 @@ function Require(module_name)
         return cache_module
     endif
 
-    let c_d = g:__CurrentMmoduleDir__()
+    let c_d = g:__CurrentModuleDir__()
     if module_name =~ '^\.\.\/' || module_name =~ '^\.\/'
         let paths = [c_d]
+    elseif module_name =~ '^\.$'
+        let paths = [c_d] 
+        let module_name = g:__CurrentModuleName__()
     elseif module_name =~ '^\/'
         let paths = [fnamemodify(module_name, ':h')]
         let module_name = fnamemodify(module_name, ':t')
@@ -170,12 +177,12 @@ function Require(module_name)
 endfunction
 
 function Exports(key, value)
-    let g:__module_tmp__[g:__CurrentMmodulePath__()][a:key] = a:value
+    let g:__module_tmp__[g:__CurrentModulePath__()][a:key] = a:value
     return function('Exports')
 endfunction
 
 function Module(value)
-    let g:__module_tmp__[g:__CurrentMmodulePath__()] = a:value
+    let g:__module_tmp__[g:__CurrentModulePath__()] = a:value
     return function('Exports')
 endfunction
 
