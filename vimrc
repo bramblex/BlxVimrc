@@ -14,10 +14,9 @@ let g:utils = Require('utils')
 
 call Require('modules')
 
-let g:test = Require('lib/test')
-if $TEST == 'true'
-    Require('test')
-end
+" test
+call Require('test')
 
 " set for NeoVim
 set ttimeoutlen=0
+

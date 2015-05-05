@@ -2,8 +2,8 @@
 """"""""""""""""""""""""""""""""""""""""
 " VIM外觀配置
 
-let g:molokai_original = 1
-let g:molokai_original_background = 1
+"let g:molokai_original = 1
+"let g:molokai_original_background = 1
 colorscheme molokai
 "colorscheme monokai
 set t_Co=256

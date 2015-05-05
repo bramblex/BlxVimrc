@@ -197,7 +197,7 @@ function g:_init_vimrc_file_type_()
     set filetype=vim
     syn keyword vimFuncName contained Require Exports Module PathAppend
 endfunction
-autocmd BufReadPost .vimrc,vimrc,*.vimrc,*vim call g:_init_vimrc_file_type_()
+autocmd BufReadPost .vimrc,vimrc,*.vimrc,*.vim call g:_init_vimrc_file_type_()
 
 " Vim
 " vim: set filetype=vim
