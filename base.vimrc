@@ -1,8 +1,10 @@
 
+call PathAppend('./')
+
 let g:config = Require('config')
 let g:utils = Require('utils')
 
 call Require('rc')
 
-" test
+" unit test
 call Require('test')

@@ -217,7 +217,6 @@ function Module(value)
         let g:__module_tmp__[g:__CurrentModulePath__()][item[0]] = item[1]
     endfor
 
-    "let g:__module_tmp__[g:__CurrentModulePath__()] = a:value
     return function('Exports')
 endfunction
 
