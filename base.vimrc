@@ -5,6 +5,3 @@ let g:config = Require('config')
 let g:utils = Require('utils')
 
 call Require('rc')
-
-" unit test
-call Require('test')
