@@ -88,10 +88,7 @@ vnoremap <leader>S :s///g<left><left><left>
 call Require('rails')
 call Require('dict')
 call Require('ctrlp')
-call Require('man')
-call Require('insert')
 call Require('conque')
-"call Require('tab')
 
 " End
 """"""""""""""""""""""""""""""""""""""""

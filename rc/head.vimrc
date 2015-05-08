@@ -5,7 +5,7 @@
     " 开启语法高亮
     syntax on
 
-    set regexpengine=1
+    "set regexpengine=1
 
     "检测文件类型
     filetype on

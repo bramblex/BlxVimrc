@@ -44,7 +44,7 @@ function g:__CurrentModuleDir__()
 endfunction
 
 function g:__CurrentModuleName__()
-    return join(fnamemodify(split(g:__CurrentModulePath__(), '.')[:-1], ':p'), '.')
+    return fnamemodify(g:__CurrentModulePath__(), ':t')[ 0: -len('.vimrc')-1 ]
 endfunction
 
 function PathAppend(path)
@@ -109,6 +109,7 @@ function s:LoadPackage(package_path)
     end
 endfunction
 
+
 function s:Cache(module_name, module)
     let c_d = g:__CurrentModuleDir__()
     if !has_key(s:caches, c_d)
@@ -130,7 +131,7 @@ function Require(module_name)
 
     let module_name = substitute(a:module_name, '^\s*\(.\{-}\)\s*$', '\1', '')
 
-    if module_name !~ '^[_a-zA-z\/\.]*$'
+    if module_name !~ '^[_a-zA-z\/\.\*]*$'
         call s:Log('error', 'Module name error ' . module_name)
         return 0
     endif
@@ -149,6 +150,8 @@ function Require(module_name)
     elseif module_name =~ '^\/'
         let paths = [fnamemodify(module_name, ':h')]
         let module_name = fnamemodify(module_name, ':t')
+    elseif module_name =~ '^\*$'
+        return s:RequireAll(g:__CurrentModuleDir__())
     else
         let paths = insert(copy(s:paths), c_d)
     endif
@@ -176,26 +179,65 @@ function Require(module_name)
     return 0
 endfunction
 
+function s:RequireAll(path)
+    let result = {}
+    for m in split(globpath(a:path, '*'), '\n')
+
+        if m == g:__CurrentModulePath__()
+            continue
+        endif
+
+        if m =~ '.*\.vimrc$' && filereadable(m) && !isdirectory(m)
+            let m_name = fnamemodify(m, ':t')[ 0: -len('.vimrc')-1 ]
+            let result[m_name] = Require(m_name)
+        elseif isdirectory(m)
+            if filereadable(m . '/base.vimrc') 
+                        \&& !isdirectory(m . '/base.vimrc')
+                let p_name = fnamemodify(m, ':t')
+                let result[p_name] = Require(p_name)
+            endif
+        endif
+
+    endfor
+    return result
+endfunction
+
 function Exports(key, value)
     let g:__module_tmp__[g:__CurrentModulePath__()][a:key] = a:value
     return function('Exports')
 endfunction
 
 function Module(value)
-    let g:__module_tmp__[g:__CurrentModulePath__()] = a:value
+    if type(a:value) != type({})
+        call s:Log('error', 'Module should be dict type')
+        return 0
+    endif
+
+    for item in items(a:value)
+        let g:__module_tmp__[g:__CurrentModulePath__()][item[0]] = item[1]
+    endfor
+
+    "let g:__module_tmp__[g:__CurrentModulePath__()] = a:value
     return function('Exports')
+endfunction
+
+function Self()
+    silent return Require('.')
 endfunction
 
 " Append base module
 if !exists('g:require_base_module')
     let g:require_base_module = resolve(expand('<sfile>:p'))
 end
+if !exists('g:require_enable_warring')
+    let g:require_enable_warring = 1
+end
 call s:ModulePathPush(g:require_base_module)
 
 " Set file type to vim
 function g:_init_vimrc_file_type_()
     set filetype=vim
-    syn keyword vimFuncName contained Require Exports Module PathAppend
+    syn keyword vimFuncName contained Require Exports Module PathAppend Self
 endfunction
 autocmd BufReadPost .vimrc,vimrc,*.vimrc,*.vim call g:_init_vimrc_file_type_()
 
