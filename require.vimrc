@@ -3,9 +3,11 @@
 "
 "   Auth:       Brambles
 "   Email:      qjnight@gmail.com
-"   Respone:    http://https://github.com/bramblex/BlxVimrc.git
+"   Respone:    https://github.com/bramblex/BlxVimrc.git
 "   Date:       Fri Apr 17
 "
+let s:module_subfix = '.vimrc'
+let s:package_mainfile = 'base' . s:module_subfix
 
 let s:paths = []
 let s:modules = {}
@@ -44,7 +46,7 @@ function g:__CurrentModuleDir__()
 endfunction
 
 function g:__CurrentModuleName__()
-    return fnamemodify(g:__CurrentModulePath__(), ':t')[ 0: -len('.vimrc')-1 ]
+    return fnamemodify(g:__CurrentModulePath__(), ':t')[ 0: -len(s:module_subfix)-1 ]
 endfunction
 
 function PathAppend(path)
@@ -101,7 +103,7 @@ function s:LoadModule(module_path)
 endfunction
 
 function s:LoadPackage(package_path)
-    let package_base = simplify(a:package_path . '/base.vimrc' )
+    let package_base = simplify(a:package_path . '/' . s:package_mainfile )
     if filereadable(package_base)
         return s:LoadModule(package_base)
     else
@@ -158,7 +160,7 @@ function Require(module_name)
 
     for path in paths
 
-        let module_path = simplify(path . '/' . module_name . '.vimrc')
+        let module_path = simplify(path . '/' . module_name . s:module_subfix)
         let package_path = simplify(path . '/' . module_name)
 
         if has_key(s:modules, module_path)
@@ -187,12 +189,12 @@ function s:RequireAll(path)
             continue
         endif
 
-        if m =~ '.*\.vimrc$' && filereadable(m) && !isdirectory(m)
-            let m_name = fnamemodify(m, ':t')[ 0: -len('.vimrc')-1 ]
+        if m =~ '.*\'.s:module_subfix.'$' && filereadable(m) && !isdirectory(m)
+            let m_name = fnamemodify(m, ':t')[ 0: -len(s:module_subfix)-1 ]
             let result[m_name] = Require(m_name)
         elseif isdirectory(m)
-            if filereadable(m . '/base.vimrc') 
-                        \&& !isdirectory(m . '/base.vimrc')
+            if filereadable(m . s:package_mainfile) 
+                        \&& !isdirectory(m . s:package_mainfile)
                 let p_name = fnamemodify(m, ':t')
                 let result[p_name] = Require(p_name)
             endif
@@ -234,11 +236,12 @@ end
 call s:ModulePathPush(g:require_base_module)
 
 " Set file type to vim
-function g:_init_vimrc_file_type_()
+function g:_init_module_file_type_()
     set filetype=vim
     syn keyword vimFuncName contained Require Exports Module PathAppend Self
 endfunction
-autocmd BufReadPost .vimrc,vimrc,*.vimrc,*.vim call g:_init_vimrc_file_type_()
+autocmd BufReadPost vimrc,.vimrc,*.vimrc,*.vim call g:_init_module_file_type_()
+exec 'autocmd BufReadPost *' . s:module_subfix . ' call g:_init_module_file_type_()'
 
 " Vim
 " vim: set filetype=vim
