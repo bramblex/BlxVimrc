@@ -1,7 +1,7 @@
 
-call PathAppend('./')
+function Module.Define()
+    "call PathAppend('./')
+    let g:utils = Require('utils')
+    call Require('rc')
 
-let g:config = Require('config')
-let g:utils = Require('utils')
-
-call Require('rc')
+endfunction

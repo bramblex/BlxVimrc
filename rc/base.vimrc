@@ -1,8 +1,12 @@
-call Require('head') 
+function Module.Define()
 
-call Require('bundle') 
-call Require('hotkeys') 
-call Require('themes') 
-call Require('type') 
+        call Require('head') 
 
-call Require('tail') 
+        call Require('bundle') 
+        call Require('hotkeys') 
+        call Require('themes') 
+        call Require('type') 
+
+        call Require('tail') 
+
+endfunction
