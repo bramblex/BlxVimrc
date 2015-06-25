@@ -11,13 +11,49 @@ let s:conf = {}
 let s:conf.module_subfix = '.vimrc'
 let s:conf.package_mainfile = 'base' . s:conf.module_subfix
 
+"=============== Path =====================================
+let s:path = {}
+let s:path.separator = '/'
+
+function s:path.trip(str)
+    return  substitute(a:str, '^\s*\(.\{-}\)\s*$', '\1', '')
+endfunction
+
+function s:path.join(...)
+    return simplify(join(a:000, self.separator))
+endfunction
+
+function s:path.file_name(path)
+    let path = self.trip(a:path)
+    if path[-1] == self.separator
+        let path = path[0: -2]
+    endif
+    return join(split(fnamemodify(path, ':t'), '.')[0: -2], '')
+endfunction
+
+function s:path.is_package(path)
+endfunction
+
+function s:path.is_module(path)
+endfunction
+
+function s:path.expand(base, path)
+endfunction
+
 "================= Module Context  ==========================
 let s:context = {}
-let s:context.__include__ = []
+let s:context.__sys_path__ = []
 let s:context.__content__ = []
+
+function s:context.__append__(path)
+    call insert(s:context.__sys_path__, a:path, 0)
+    return s:context.__sys_path__
+endfunction
 
 function s:context.push(path)
     let c = {}
+    "let c.__sys_path__ = self.__sys_path__
+    let c.Append = self.__append__
     let c.path = a:path
     let c.dirname = fnamemodify(a:path, ':h')
     let c.cache = {}
@@ -72,46 +108,6 @@ function s:SearchCache(key)
     return g:Module.cache[a:key]
 endfunction
 
-"=============== Path =====================================
-let s:utils = {}
-function s:utils.trip(str)
-    return  substitute(a:str, '^\s*\(.\{-}\)\s*$', '\1', '')
-endfunction
-
-let s:path = {}
-let s:path.separator = '/'
-function s:path.join(...)
-    return simplify(join(a:000, self.separator))
-endfunction
-
-function s:path.file_name(path)
-    let path = s:utils.trip(a:path)
-    if path[-1] == self.separator
-        let path = path[0: -2]
-    endif
-    return join(split(fnamemodify(path, ':t'), '.')[0: -2], '')
-endfunction
-
-function s:path.can_load(path)
-    if filereadable(a:path)
-
-        if isdirectory(a:path)
-            let mainfile = self.join(a:path, s:conf.package_mainfile)
-            if filereadable(mainfile) && !isdirectory(mainfile)
-                return 1
-            endif
-        elseif
-            let name = self.file_name(a:path)
-            if name =~ '^.+\' . s:conf.module_subfix . '$' 
-                return 1
-            end
-        endif
-
-    endif
-    "'^.+\.vimrc$' 
-    return 0
-endfunction
-
 "================ Require Interface ========================
 
 function Require(module_name)
@@ -132,6 +128,25 @@ function Require(module_name)
     echoerr 'BLXE002: Can not find module or package: ' . a:module_name
                 \ . ' in ' . g:Module.path
 endfunction
+
+"function s:path.can_load(path)
+    "if filereadable(a:path)
+
+        "if isdirectory(a:path)
+            "let mainfile = self.join(a:path, s:conf.package_mainfile)
+            "if filereadable(mainfile) && !isdirectory(mainfile)
+                "return 1
+            "endif
+        "elseif
+            "let name = self.file_name(a:path)
+            "if name =~ '^.+\' . s:conf.module_subfix . '$' 
+                "return 1
+            "end
+        "endif
+
+    "endif
+    "return 0
+"endfunction
 
 " Vim
 " vim: set filetype=vim

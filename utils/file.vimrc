@@ -1,0 +1,37 @@
+function Module.Define()
+
+    function self.AbsolutePath(path)
+        return fnamemodify(expand(a:path), ':p')
+    endfunction
+
+    function self.Dirname(path)
+        return fnamemodify(expand(a:path), ':p:h')
+    endfunction
+
+    function self.CurrentFile()
+        return self.AbsolutePath('%')
+    endfunction
+
+    function self.ChooseFile(dir_path)
+        let tmp_file = tempname()
+        let path = self.AbsolutePath(a:dir_path)
+
+        silent exec join(['!ranger', path, '--choosefile=' . tmp_file], ' ')
+        redraw!
+
+        let result = 0
+        if filereadable(tmp_file)
+            silent let result = system('cat '. tmp_file)
+        endif
+        silent call system('rm -rf ' . tmp_file)
+        return result
+    endfunction
+
+    function self.ChooseAndEdit(dir_path)
+        let file = self.ChooseFile(a:dir_path)
+        if filereadable(file)
+            exec 'edit '. file
+        endif
+    endfunction
+
+endfunction
