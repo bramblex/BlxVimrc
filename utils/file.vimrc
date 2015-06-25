@@ -1,5 +1,7 @@
 function Module.Define()
 
+    let self.ranger = 'ranger'
+
     function self.AbsolutePath(path)
         return fnamemodify(expand(a:path), ':p')
     endfunction
@@ -16,7 +18,7 @@ function Module.Define()
         let tmp_file = tempname()
         let path = self.AbsolutePath(a:dir_path)
 
-        silent exec join(['!ranger', path, '--choosefile=' . tmp_file], ' ')
+        silent exec join(['!', self.ranger, path, '--choosefile=' . tmp_file], ' ')
         redraw!
 
         let result = 0
