@@ -2,3 +2,4 @@
 bundle/*
 .netrwhist
 /test/*
+.back_up/*

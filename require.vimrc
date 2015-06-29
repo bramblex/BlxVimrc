@@ -31,10 +31,8 @@ function s:path.file_name(path)
     return join(split(fnamemodify(path, ':t'), '.')[0: -2], '')
 endfunction
 
-function s:path.is_package(path)
-endfunction
-
-function s:path.is_module(path)
+function s:path.absolute(path)
+    return resolve(a:path)
 endfunction
 
 function s:path.expand(base, path)
@@ -46,17 +44,24 @@ let s:context.__sys_path__ = []
 let s:context.__content__ = []
 
 function s:context.__append__(path)
-    call insert(s:context.__sys_path__, a:path, 0)
+    call insert(self.sys_path, a:path, 0)
     return s:context.__sys_path__
 endfunction
 
 function s:context.push(path)
+
     let c = {}
-    "let c.__sys_path__ = self.__sys_path__
     let c.Append = self.__append__
+    let c.sys_path = []
     let c.path = a:path
+    let c.real_path = s:path.absolute(a:path)
     let c.dirname = fnamemodify(a:path, ':h')
     let c.cache = {}
+
+    if len(self.__content__)
+        let c.parent = self.__content__[-1]
+    endif
+
     call add(self.__content__, c)
     let g:Module = self.__content__[-1]
 endfunction
@@ -73,16 +78,21 @@ call s:context.push(g:require_base_module)
 
 "================= Load & Excute & Stroe module ============
 let s:Modules = {}
-function s:LoadModule(module_path, force)
-    if has_key(s:Modules, a:module_path) && !a:force 
-        return s:Modules[a:module_path]
-    endif
 
-    let s:Modules[a:module_path] = {}
-    let l:module = s:Modules[a:module_path]
-    
+function s:Fetch(M, )
+endfunction
+
+function s:LoadModule(module_path, force)
     "===================
     call s:context.push(a:module_path)
+
+    if has_key(s:Modules, g:Module.real_path) && !a:force 
+        return s:Modules[g:Module.real_path]
+    endif
+
+    let s:Modules[g:Module.real_path] = {}
+    let l:module = s:Modules[g:Module.real_path]
+    
 
     exec 'source ' . a:module_path
     if has_key(g:Module, 'Define')
@@ -97,15 +107,6 @@ function s:LoadModule(module_path, force)
     "===================
 
     return l:module
-endfunction
-
-"======================= Cache =======================
-function s:Cache(key, module)
-    g:Module.cache[a:key] == a:module
-endfunction
-
-function s:SearchCache(key)
-    return g:Module.cache[a:key]
 endfunction
 
 "================ Require Interface ========================
