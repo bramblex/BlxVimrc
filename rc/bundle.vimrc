@@ -34,7 +34,7 @@ call vundle#begin()
 " MiniBufexpl.vim
     Bundle 'fholgado/minibufexpl.vim'
 
-" mileszs/ack.vim
+ "mileszs/ack.vim
     Bundle 'mileszs/ack.vim'
 
 " sheerun/vim-polyglot
@@ -42,6 +42,8 @@ call vundle#begin()
 
 " kien/ctrlp.vim
     Bundle 'kien/ctrlp.vim'
+" bramblex/conque
+    Bundle 'bramblex/conque'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
