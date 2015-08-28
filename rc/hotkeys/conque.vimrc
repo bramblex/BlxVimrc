@@ -1,3 +1,3 @@
 
 " Conque的快捷键设定
-nnoremap <leader><leader>c :ConqueTermSplit zsh<cr><cr>
+exec 'nnoremap <leader><leader>c :ConqueTermSplit '. $SHELL '<cr><cr>'
