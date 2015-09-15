@@ -21,6 +21,11 @@ call vundle#begin()
 
 " 自动补全单引号，双引号等
     Bundle 'Raimondi/delimitMate'
+
+    Bundle 'tpope/vim-surround'
+    " cs + a + b chang a -> b
+    " ys + (text object) add
+    " c/d/v + i + '/"/(/{/</[ 可以操作环绕
     " for python docstring ",优化输入
     au FileType python let b:delimitMate_nesting_quotes = ['"']
 
@@ -42,8 +47,12 @@ call vundle#begin()
 
 " kien/ctrlp.vim
     Bundle 'kien/ctrlp.vim'
+
 " bramblex/conque
     Bundle 'bramblex/conque'
+
+" Yggdroot/indentLine
+    "Bundle 'Yggdroot/indentLine'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
