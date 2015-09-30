@@ -11,6 +11,7 @@ let g:mapleader = '\'
 " 基本操作
 nnoremap <leader>q :q<cr>
 nnoremap <leader>w :w<cr>
+cmap w!! w !sudo tee > /dev/null %
 
 " 切換buffer
 nnoremap <C-n> :MBEbn<cr>
