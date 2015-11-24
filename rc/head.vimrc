@@ -64,5 +64,5 @@
     set nobackup
     set noswapfile
 
-    set clipboard+=unnamed " 共享剪贴板
+    "set clipboard+=unnamed " 共享剪贴板
 

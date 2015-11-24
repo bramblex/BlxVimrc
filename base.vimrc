@@ -1,6 +1,4 @@
 
-call Module.Append('./')
-
 function Module.Define()
     "call PathAppend('./')
     let g:utils = Require('utils')

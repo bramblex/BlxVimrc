@@ -43,8 +43,10 @@ set pastetoggle=<F5>
 " 寄存器優化
 
     " 利用寄存器
-    nnoremap <leader>y "ry
-    nnoremap <leader>p "rP
+    noremap <leader>y "*y
+    noremap <leader>p "*P
+
+
 
 " 自动注释
 vmap / \c<space>

@@ -52,7 +52,7 @@ call vundle#begin()
     Bundle 'bramblex/conque'
 
 " scrooloose/syntastic
-    Bundle 'scrooloose/syntastic'
+    "Bundle 'scrooloose/syntastic'
 
 " Yggdroot/indentLine
     "Bundle 'Yggdroot/indentLine'
