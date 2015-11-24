@@ -294,3 +294,8 @@ function Module.Define()
     endfunction
 
 endfunction
+
+" Vim
+" vim: set filetype=vim
+" Emacs
+" -*- mode: vim; -*-
