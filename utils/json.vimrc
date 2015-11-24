@@ -24,6 +24,14 @@ function Module.Define()
         return s:parseJson(l:token_stream, 0)[0]
     endfunction
 
+    function self.load(path)
+        if filereadable(a:path) 
+            return self.parse(join(readfile(a:path), "\n"))
+        else
+            throw 'Read File Error'
+        endif
+    endfunction
+
     let s:dfa_states = []
     for i in range(0, 26)
         call add(s:dfa_states, {'nu': i})
@@ -202,7 +210,7 @@ function Module.Define()
         elseif l:first_type == '['
             return s:parseList(a:token_stream, a:i)
         elseif l:first_type == 'String'
-            return [l:first_content[1:-2], a:i+1]
+            return [eval(l:first_content), a:i+1]
         elseif l:first_type == 'Boolean'
             if l:first_content == 'true'
                 return [1, a:i+1]
