@@ -37,7 +37,8 @@ call vundle#begin()
     Bundle 'scrooloose/nerdcommenter'
 
 " MiniBufexpl.vim
-    Bundle 'fholgado/minibufexpl.vim'
+    "Bundle 'fholgado/minibufexpl.vim'
+    Bundle 'bramblex/minibufexpl.vim'
 
  "mileszs/ack.vim
     Bundle 'mileszs/ack.vim'
