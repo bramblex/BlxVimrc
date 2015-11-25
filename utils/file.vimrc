@@ -23,9 +23,12 @@ function Module.Define()
                         \'name': 'ranger', 
                         \'tmp_file': tmp_file }
             function! rangerCallback.on_exit(id, code)
+                bdelete!
                 if filereadable(self.tmp_file)
                     exec 'edit '. system('cat '. self.tmp_file)
                     silent call system('rm -rf ' . self.tmp_file)
+                else
+                    exec 'edit ' . expand('%')
                 endif
             endfunction
 

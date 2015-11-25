@@ -130,25 +130,6 @@ function Require(module_name)
                 \ . ' in ' . g:Module.path
 endfunction
 
-"function s:path.can_load(path)
-    "if filereadable(a:path)
-
-        "if isdirectory(a:path)
-            "let mainfile = self.join(a:path, s:conf.package_mainfile)
-            "if filereadable(mainfile) && !isdirectory(mainfile)
-                "return 1
-            "endif
-        "elseif
-            "let name = self.file_name(a:path)
-            "if name =~ '^.+\' . s:conf.module_subfix . '$' 
-                "return 1
-            "end
-        "endif
-
-    "endif
-    "return 0
-"endfunction
-
 " Vim
 " vim: set filetype=vim
 "

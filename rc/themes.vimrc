@@ -23,6 +23,17 @@ set statusline=%<%f\ %h%m%r%=%k[%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\
 " MBEVisibleActiveNormal
 " MBEVisibleActiveChanged
 
+"let g:miniBufExplForceSyntaxEnable=1
+"let g:miniBufExplSplitBelow = 0
+"let g:miniBufExplForceSyntaxEnable = 0
+"let g:miniBufExplMapCTabSwitchBufs = 1
+"let g:miniBufExplMapWindowNavVim = 1
+"let g:miniBufExplMapWindowNavArrows = 1
+"let g:miniBufExplMaxSize = 0
+"let g:miniBufExplModSelTarget = 1
+"let g:miniBufExplTabWrap = 1
+"let g:miniBufExplUseSingleClick = 1
+"let g:miniBufExplCheckDupeBufs = 0
 hi MBENormal guifg=darkgrey ctermfg=darkgrey
 hi MBEVisibleNormal cterm=underline guifg=grey ctermfg=grey
 hi MBEVisibleActiveNormal cterm=underline guifg=lightyellow ctermfg=lightyellow
