@@ -40,27 +40,14 @@ endfunction
 
 "================= Module Context  ==========================
 let s:context = {}
-let s:context.__sys_path__ = []
 let s:context.__content__ = []
-
-function s:context.__append__(path)
-    call insert(self.sys_path, a:path, 0)
-    return s:context.__sys_path__
-endfunction
 
 function s:context.push(path)
 
     let c = {}
-    let c.Append = self.__append__
-    let c.sys_path = []
     let c.path = a:path
     let c.real_path = s:path.absolute(a:path)
     let c.dirname = fnamemodify(a:path, ':h')
-    let c.cache = {}
-
-    if len(self.__content__)
-        let c.parent = self.__content__[-1]
-    endif
 
     call add(self.__content__, c)
     let g:Module = self.__content__[-1]
@@ -78,10 +65,6 @@ call s:context.push(g:require_base_module)
 
 "================= Load & Excute & Stroe module ============
 let s:Modules = {}
-
-function s:Fetch(M, )
-endfunction
-
 function s:LoadModule(module_path, force)
     "===================
     call s:context.push(a:module_path)
@@ -93,12 +76,12 @@ function s:LoadModule(module_path, force)
     let s:Modules[g:Module.real_path] = {}
     let l:module = s:Modules[g:Module.real_path]
     
-
     exec 'source ' . a:module_path
     if has_key(g:Module, 'Define')
-        let l:module.Define = g:Module.Define
+        let l:Define = g:Module.Define
+        let l:module.Define = l:Define
         call l:module.Define()
-        if l:module.Define == g:Module.Define
+        if l:module.Define == l:Define
             call remove(l:module, 'Define')
         endif
     endif
@@ -110,9 +93,9 @@ function s:LoadModule(module_path, force)
 endfunction
 
 "================ Require Interface ========================
-
 function Require(module_name)
-    let module_path = s:path.join(g:Module.dirname, a:module_name)
+    let module_path = s:path.absolute(
+                \s:path.join(g:Module.dirname, s:path.trip(a:module_name)))
 
     if isdirectory(module_path)
         let package_mainfile = s:path.join(module_path, s:conf.package_mainfile)
