@@ -1,9 +1,9 @@
 #BlxVimrc
 1. [简介](#简介)
-2. [require.vimrc简介](#require.vimrc简介)
+2. [require.vimrc简介](#requirevimrc简介)
 3. [安装](#安装)
 4. [使用](#使用)
-5. [require.vimrc使用](#require.vimrc使用)
+5. [require.vimrc使用](#requirevimrc使用)
 6. [扩展](#扩展)
 
 ##简介:
