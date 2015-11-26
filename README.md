@@ -1,9 +1,9 @@
 #BlxVimrc
 1. [简介](#简介)
-2. [require.vimrc简介](#require.vimrc简介)
+2. [require.vimrc简介](#requirevimrc简介)
 3. [安装](#安装)
 4. [使用](#使用)
-5. [require.vimrc使用](#require.vimrc使用)
+5. [require.vimrc使用](#requirevimrc使用)
 6. [扩展](#扩展)
 
 ##简介:
@@ -59,7 +59,7 @@ let module = Require('module') " 在乎返回
 ```
 
 ###2.定义一个模块
-```
+```VimL
 " hello_module.vimrc
 function Module.Define()
     self.text = 'Hello World!'
@@ -70,13 +70,13 @@ endfunction
 ```
 
 加载执行上面那个模块
-```
+```VimL
 let hello_module = Require('hello_module')
 call hello_module.run() " => Hello World!
 ```
 
 ###3.定义一个包
-```
+```VimL
 " hello_package/base.vimrc
 function Module.Define()
     self.text = 'Hello World!'
@@ -86,7 +86,7 @@ function Module.Define()
 endfunction
 ```
 加载执行上面那个包
-```
+```VimL
 let hello_package = Require('hello_package')
 call hello_package.run() " => Hello World!
 ```
