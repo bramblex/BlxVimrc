@@ -41,6 +41,8 @@
 
 " 退出时询问保存
     set confirm
+" 切换buffer的时候不会要求一定要保存
+    set bufhidden=hide
 
 " 在上下移动光标时，光标的上方或下方至少会保留显示的行数
     set scrolloff=3

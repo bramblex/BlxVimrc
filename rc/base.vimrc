@@ -1,12 +1,15 @@
 function Module.Define()
 
-        call Require('head') 
+    call Require('head') 
 
-        call Require('bundle') 
-        call Require('hotkeys') 
-        call Require('themes') 
-        call Require('type') 
+    call Require('bundle') 
+    call Require('hotkeys') 
+    call Require('themes') 
+    call Require('type') 
 
-        call Require('tail') 
+    call Require('tail') 
 
+    if has('nvim')
+        call Require('neo')
+    endif
 endfunction

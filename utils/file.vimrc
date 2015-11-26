@@ -27,12 +27,10 @@ function Module.Define()
                 if filereadable(self.tmp_file)
                     exec 'edit '. system('cat '. self.tmp_file)
                     silent call system('rm -rf ' . self.tmp_file)
-                elseif !empty(expand('%'))
-                    exec 'edit ' . expand('%')
                 endif
             endfunction
 
-            enew
+            tabnew
             call termopen( join([self.ranger, path, '--choosefile=' . tmp_file], ' '), rangerCallback)
             startinsert
         endfunction

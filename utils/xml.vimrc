@@ -4,6 +4,7 @@ function Module.Define()
 
 endfunction
 
+
 " Vim
 " vim: set filetype=vim
 " Emacs
