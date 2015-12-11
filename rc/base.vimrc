@@ -1,5 +1,7 @@
 function Module.Define()
 
+    call Require('default') 
+
     call Require('head') 
 
     call Require('bundle') 
