@@ -69,13 +69,13 @@ function s:LoadModule(module_path, force)
     "===================
     call s:context.push(a:module_path)
 
-    if has_key(s:Modules, g:Module.real_path) && !a:force 
+    if has_key(s:Modules, g:Module.real_path) && !a:force
         return s:Modules[g:Module.real_path]
     endif
 
     let s:Modules[g:Module.real_path] = {}
     let l:module = s:Modules[g:Module.real_path]
-    
+
     exec 'source ' . a:module_path
     if has_key(g:Module, 'Define')
         let l:Define = g:Module.Define

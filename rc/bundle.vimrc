@@ -38,7 +38,8 @@ call vundle#begin()
 
 " MiniBufexpl.vim
     "Bundle 'fholgado/minibufexpl.vim'
-    Bundle 'bramblex/minibufexpl.vim'
+    "Bundle 'bramblex/minibufexpl.vim'
+    Bundle 'bling/vim-airline'
 
  "mileszs/ack.vim
     Bundle 'mileszs/ack.vim'
@@ -51,7 +52,7 @@ call vundle#begin()
     Bundle 'kien/ctrlp.vim'
 
 " bramblex/conque
-    Bundle 'bramblex/conque'
+    "Bundle 'bramblex/conque'
 
 " scrooloose/syntastic
     "Bundle 'scrooloose/syntastic'

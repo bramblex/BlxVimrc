@@ -14,13 +14,13 @@ nnoremap <leader>w :w<cr>
 cmap w!! w !sudo tee > /dev/null %
 
 " 切換buffer
-nnoremap <C-n> :MBEbn<cr>
-nnoremap <C-p> :MBEbp<cr>
-nnoremap <leader>d :MBEbd<cr>
+"nnoremap <C-n> :MBEbn<cr>
+"nnoremap <C-p> :MBEbp<cr>
+"nnoremap <leader>d :MBEbd<cr>
 "nnoremap <leader>d :MBEbw<cr>
-"nnoremap <C-n> :bn<CR>
-"nnoremap <C-p> :bp<CR>
-"nnoremap <leader>d :bd<CR>
+nnoremap <C-n> :bn<CR>
+nnoremap <C-p> :bp<CR>
+nnoremap <leader>d :bd<CR>
 
 " NERDTree快捷鍵
 "nnoremap <leader>e :NERDTreeToggle<CR>

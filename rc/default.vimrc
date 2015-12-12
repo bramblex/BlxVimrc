@@ -1,0 +1,2 @@
+
+set shell=/bin/bash
