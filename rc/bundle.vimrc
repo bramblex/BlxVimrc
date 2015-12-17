@@ -47,6 +47,7 @@ call vundle#begin()
 " sheerun/vim-polyglot
     Bundle 'sheerun/vim-polyglot'
     Bundle 'dag/vim-fish'
+    "Bundle 'lukerandall/haskellmode-vim'
 
 " kien/ctrlp.vim
     Bundle 'kien/ctrlp.vim'

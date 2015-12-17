@@ -11,7 +11,4 @@ function Module.Define()
 
     call Require('tail') 
 
-    if has('nvim')
-        call Require('neo')
-    endif
 endfunction
