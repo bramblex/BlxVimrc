@@ -47,6 +47,7 @@ call vundle#begin()
 " sheerun/vim-polyglot
     Bundle 'sheerun/vim-polyglot'
     Bundle 'dag/vim-fish'
+    Bundle 'raichoo/purescript-vim'
     "Bundle 'lukerandall/haskellmode-vim'
 
 " kien/ctrlp.vim
@@ -60,6 +61,8 @@ call vundle#begin()
 
 " Yggdroot/indentLine
     "Bundle 'Yggdroot/indentLine'
+    
+    Bundle 'bramblex/ranger.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required

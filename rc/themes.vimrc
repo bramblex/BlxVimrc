@@ -9,13 +9,41 @@ colorscheme molokai
 set t_Co=256
 
 " airline
+set laststatus=2
 let g:airline_powerline_fonts = 1
 let g:airline_theme='bubblegum'
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_detect_whitespace=0
-
+let g:airline_mode_map = {
+            \ '__' : '-',
+            \ 'n'  : 'N',
+            \ 'i'  : 'I',
+            \ 'R'  : 'R',
+            \ 'c'  : 'C',
+            \ 'v'  : 'V',
+            \ 'V'  : 'V',
+            \ '' : 'V',
+            \ 's'  : 'S',
+            \ 'S'  : 'S',
+            \ '' : 'S',
+            \ }
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
+"set noshowmode
+"let g:airline_detect_whitespace=0
+"
 let g:ctrlp_by_filename = 1
-
+"let g:airline#extensions#tabline#left_sep = ' '
+"let g:airline#extensions#tabline#left_alt_sep = '/'
+"let g:airline#extensions#tabline#right_sep = ' '
+"let g:airline#extensions#tabline#right_alt_sep = '|'
 
 " 命令行（在状态行下）的高度，默认为1，这里是2
 "set statusline=%<%f\ %h%m%r%=%k[%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}]\ %-14.(%l,%c%V%)\ %P
@@ -48,6 +76,7 @@ let g:ctrlp_by_filename = 1
 "hi MBEVisibleActiveNormal cterm=underline guifg=lightyellow ctermfg=lightyellow
 
 " 更改molokai蛋疼選中的顏色
+hi Visual cterm=inverse ctermbg=235 gui=inverse guibg=235
 "hi Visual ctermbg=lightgrey guibg=lightgrey
 
 "set background=dark
