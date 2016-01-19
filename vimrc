@@ -8,3 +8,4 @@
 let g:require_base_module = resolve(expand('<sfile>:p'))
 exec 'source ' . resolve(fnamemodify(g:require_base_module, ':h'). '/require.vimrc')
 call Require('./')
+
