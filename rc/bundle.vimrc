@@ -39,6 +39,7 @@ call vundle#begin()
 " MiniBufexpl.vim
     "Bundle 'fholgado/minibufexpl.vim'
     "Bundle 'bramblex/minibufexpl.vim'
+    Bundle 'vim-airline/vim-airline'
     Bundle 'vim-airline/vim-airline-themes'
 
  "mileszs/ack.vim
