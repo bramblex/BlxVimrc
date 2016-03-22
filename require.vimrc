@@ -78,12 +78,20 @@ function s:LoadModule(module_path, force)
 
     exec 'source ' . a:module_path
     if has_key(g:Module, 'Define')
-        let l:Define = g:Module.Define
-        let l:module.Define = l:Define
-        call l:module.Define()
-        if l:module.Define == l:Define
-            call remove(l:module, 'Define')
+
+        if has('patch1584')
+            let l:Define = function(g:Module.Define)
+            let l:module.Define = l:Define
+            call l:module.Define()
+        else
+            let l:Define = g:Module.Define
+            let l:module.Define = l:Define
+            call l:module.Define()
+            if l:module.Define == l:Define
+                call remove(l:module, 'Define')
+            endif
         endif
+
     endif
 
     call s:context.pop()
