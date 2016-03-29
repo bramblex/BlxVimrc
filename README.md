@@ -16,6 +16,21 @@ require.vimrc是使用纯粹的VimScript在VimScript语言层面上模拟了一�
 
 require.vimrc中的模块是在VimScript运行中动态加载的，所以你可以选择在你想要的时候进行模块的加载。require.vimrc自带缓存，同样的一个包或者模块只会被加载运行一次。在require.vimrc系统中，模块或者包之间的相互依赖也能够良好的处理，不会像Python那样出现不能相互依赖的蛋疼问题。
 
+虽然我个人觉得我的解决方案是挺好的，但是 NeoVim 的作者 tarruda 明确表示了我做的东西其实毫无卵用 ╮(╯▽╰)╭，以下是他对我这东西的评价：
+
+Very interesting, thanks for sharing.
+
+A module system like this is a good way to organize big programs/libraries written in a language that has no concept of modules like javascript(pre ES6). There are a few problems with doing this for vimscript though:
+
+* .The majority of vimscript code is already out there and incompatible with this pattern
+
+* .It lacks closures, so every "variable" is exported.
+
+* .It's not possible to convert existing code to use this pattern(unlike javascript, where one can convert an existing library that doesn't understand the module system by wrapping it into a closure)
+* .There's nothing to encourage developers to start writing vimscript this way. With node.js, the biggest motivator were it's package echosystem and the fact that no widespread server-side javascript platform existed.
+* .Mostly my personal opinion, but vimscript is a bad language for writing large programs despite having a module system, so I wouldn't recommend it for anything but basic vim/nvim scripting.
+
+
 ##安装：
 ###1.备份或者删除 ~/.vim, ~/.vimrc 等配置文件
 ```sh
